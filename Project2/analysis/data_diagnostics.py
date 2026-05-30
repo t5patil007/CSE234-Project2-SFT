@@ -58,6 +58,8 @@ def analyze_split(split_name, rows, schemas, rare_limit=200):
     any_empty_col_list_count = 0
     multi_table_count = 0
     missing_schema_count = 0
+    question_char_lengths = []
+    question_word_lengths = []
 
     invalid_table_refs = 0
     invalid_col_refs = 0
@@ -69,6 +71,9 @@ def analyze_split(split_name, rows, schemas, rare_limit=200):
 
     for row in rows:
         db_id = row["db_id"]
+        question = str(row.get("question", ""))
+        question_char_lengths.append(len(question))
+        question_word_lengths.append(len(question.split()))
         db_counter[db_id] += 1
         per_db_stats[db_id]["examples"] += 1
 
@@ -115,6 +120,8 @@ def analyze_split(split_name, rows, schemas, rare_limit=200):
     total_examples = len(rows)
     avg_tables = mean(table_count_per_q) if table_count_per_q else 0.0
     avg_cols = mean(col_count_per_q) if col_count_per_q else 0.0
+    avg_question_chars = mean(question_char_lengths) if question_char_lengths else 0.0
+    avg_question_words = mean(question_word_lengths) if question_word_lengths else 0.0
 
     per_db = {}
     for db_id, stats in sorted(per_db_stats.items(), key=lambda item: item[0]):
@@ -144,6 +151,8 @@ def analyze_split(split_name, rows, schemas, rare_limit=200):
         "metrics": {
             "avg_tables_per_example": avg_tables,
             "avg_columns_per_example": avg_cols,
+            "avg_question_chars": avg_question_chars,
+            "avg_question_words": avg_question_words,
             "multi_table_example_rate": (multi_table_count / total_examples) if total_examples else 0.0,
             "table_only_example_rate": (table_only_count / total_examples) if total_examples else 0.0,
             "examples_with_any_empty_column_list_rate": (
@@ -186,14 +195,23 @@ def build_markdown_report(report):
         f"- Validation examples: {val['total_examples']}",
         f"- Train unique db_id count: {train['unique_db_ids']}",
         f"- Validation unique db_id count: {val['unique_db_ids']}",
+        f"- Schema count: {report['schema_inventory']['num_schemas']}",
+        f"- Avg tables/schema: {report['schema_inventory']['avg_tables']:.2f}",
+        f"- Avg columns/schema: {report['schema_inventory']['avg_columns']:.2f}",
+        f"- Max tables in a schema: {report['schema_inventory']['max_tables']}",
+        f"- Max columns in a schema: {report['schema_inventory']['max_columns']}",
         "",
         "## Link complexity",
         f"- Train avg tables/example: {train['metrics']['avg_tables_per_example']:.3f}",
         f"- Train avg columns/example: {train['metrics']['avg_columns_per_example']:.3f}",
         f"- Train multi-table rate: {train['metrics']['multi_table_example_rate']:.3%}",
+        f"- Train avg question chars: {train['metrics']['avg_question_chars']:.1f}",
+        f"- Train avg question words: {train['metrics']['avg_question_words']:.1f}",
         f"- Validation avg tables/example: {val['metrics']['avg_tables_per_example']:.3f}",
         f"- Validation avg columns/example: {val['metrics']['avg_columns_per_example']:.3f}",
         f"- Validation multi-table rate: {val['metrics']['multi_table_example_rate']:.3%}",
+        f"- Validation avg question chars: {val['metrics']['avg_question_chars']:.1f}",
+        f"- Validation avg question words: {val['metrics']['avg_question_words']:.1f}",
         "",
         "## Wildcard / table-only signatures",
         (
@@ -254,6 +272,7 @@ def main():
     train = load_json(root / "train.json")
     validation = load_json(root / "validation.json")
     schemas = load_schema_maps(root / "schemas")
+    index_payload = load_json(root / "schemas" / "_index.json")
 
     train_report = analyze_split("train", train, schemas, rare_limit=args.rare_limit)
     val_report = analyze_split("validation", validation, schemas, rare_limit=args.rare_limit)
@@ -272,6 +291,13 @@ def main():
 
     report = {
         "splits": {"train": train_report, "validation": val_report},
+        "schema_inventory": {
+            "num_schemas": len(index_payload),
+            "max_tables": max(item["num_tables"] for item in index_payload) if index_payload else 0,
+            "max_columns": max(item["num_columns"] for item in index_payload) if index_payload else 0,
+            "avg_tables": mean(item["num_tables"] for item in index_payload) if index_payload else 0.0,
+            "avg_columns": mean(item["num_columns"] for item in index_payload) if index_payload else 0.0,
+        },
         "cross_split": {
             "underrepresented_db_ids_leq6_train_examples": underrepresented,
             "sbodemous_train_counts": sbodemo_counts,
