@@ -21,6 +21,7 @@
       "max_steps": 260,
       "logging_steps": 20,
       "eval_steps": 40,
+      "save_strategy": "epoch",
       "bf16": true
     },
     "generation": {

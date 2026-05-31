@@ -11,6 +11,17 @@ def variant_key(entry):
     return (entry["schema_mode"], entry["output_style"], entry["target_mode"])
 
 
+def run_group_key(entry):
+    return (
+        entry["schema_mode"],
+        entry["output_style"],
+        entry["target_mode"],
+        entry.get("model_name", ""),
+        entry.get("train_mode", "lora"),
+        json.dumps(entry.get("model_kwargs", {}), sort_keys=True),
+    )
+
+
 def variant_filename(split_name, key):
     schema_mode, output_style, target_mode = key
     return f"sft_{split_name}_{schema_mode}_{output_style}_{target_mode}.json"
@@ -185,7 +196,8 @@ def build_rf_model_config(entry):
 
     model_kwargs = {"device_map": "auto", "torch_dtype": "auto", "use_cache": False}
     model_kwargs.update(entry.get("model_kwargs", {}))
-    requested_save_strategy = entry["train"].get("save_strategy", "chunk")
+    # Default to explicit on-disk checkpointing for reliable adapter export.
+    requested_save_strategy = entry["train"].get("save_strategy", "epoch")
     hf_valid_save_strategies = {"no", "steps", "epoch", "best"}
     hf_save_strategy = (
         requested_save_strategy
@@ -241,10 +253,11 @@ def run_experiment(entries, args):
     experiment = Experiment(experiment_name=args.experiment_name, mode="fit")
     grouped = defaultdict(list)
     for entry in entries:
-        grouped[variant_key(entry)].append(entry)
+        grouped[run_group_key(entry)].append(entry)
     for key, group_entries in grouped.items():
-        train_path = Path(args.sft_variants_dir) / variant_filename("train", key)
-        eval_path = Path(args.sft_variants_dir) / variant_filename("validation", key)
+        dataset_key = key[:3]
+        train_path = Path(args.sft_variants_dir) / variant_filename("train", dataset_key)
+        eval_path = Path(args.sft_variants_dir) / variant_filename("validation", dataset_key)
         train_ds = load_hf_dataset(str(train_path))
         eval_ds = load_hf_dataset(str(eval_path))
         prepared_entries = []
