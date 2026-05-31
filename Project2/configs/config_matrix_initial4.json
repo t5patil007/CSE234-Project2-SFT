@@ -1,0 +1,126 @@
+[
+  {
+    "config_id": "cfg01_qwen05b_minimal_json_lora8_lr5e5",
+    "model_name": "Qwen/Qwen2.5-0.5B-Instruct",
+    "schema_mode": "minimal",
+    "output_style": "sorted_compact",
+    "target_mode": "json_only",
+    "lora": {
+      "r": 8,
+      "alpha": 16,
+      "dropout": 0.05,
+      "target_modules": ["q_proj", "v_proj"]
+    },
+    "train": {
+      "learning_rate": 5e-5,
+      "lr_scheduler_type": "linear",
+      "per_device_train_batch_size": 2,
+      "per_device_eval_batch_size": 2,
+      "gradient_accumulation_steps": 8,
+      "max_steps": 220,
+      "logging_steps": 10,
+      "eval_steps": 20,
+      "bf16": true
+    },
+    "generation": {
+      "max_new_tokens": 220,
+      "temperature": 0.1,
+      "top_p": 0.9,
+      "top_k": 30,
+      "repetition_penalty": 1.02
+    }
+  },
+  {
+    "config_id": "cfg03_qwen15b_minimal_json_lora8_lr3e5",
+    "model_name": "Qwen/Qwen2.5-1.5B-Instruct",
+    "schema_mode": "minimal",
+    "output_style": "sorted_compact",
+    "target_mode": "json_only",
+    "lora": {
+      "r": 8,
+      "alpha": 16,
+      "dropout": 0.05,
+      "target_modules": ["q_proj", "v_proj"]
+    },
+    "train": {
+      "learning_rate": 3e-5,
+      "lr_scheduler_type": "linear",
+      "per_device_train_batch_size": 2,
+      "per_device_eval_batch_size": 2,
+      "gradient_accumulation_steps": 8,
+      "max_steps": 260,
+      "logging_steps": 10,
+      "eval_steps": 20,
+      "bf16": true
+    },
+    "generation": {
+      "max_new_tokens": 240,
+      "temperature": 0.05,
+      "top_p": 0.9,
+      "top_k": 30,
+      "repetition_penalty": 1.02
+    }
+  },
+  {
+    "config_id": "cfg04_qwen15b_pkfk_json_lora16_lr3e5",
+    "model_name": "Qwen/Qwen2.5-1.5B-Instruct",
+    "schema_mode": "with_pkfk",
+    "output_style": "sorted_compact",
+    "target_mode": "json_only",
+    "lora": {
+      "r": 16,
+      "alpha": 32,
+      "dropout": 0.1,
+      "target_modules": ["q_proj", "k_proj", "v_proj", "o_proj"]
+    },
+    "train": {
+      "learning_rate": 3e-5,
+      "lr_scheduler_type": "linear",
+      "per_device_train_batch_size": 2,
+      "per_device_eval_batch_size": 2,
+      "gradient_accumulation_steps": 8,
+      "max_steps": 280,
+      "logging_steps": 10,
+      "eval_steps": 20,
+      "bf16": true
+    },
+    "generation": {
+      "max_new_tokens": 240,
+      "temperature": 0.05,
+      "top_p": 0.9,
+      "top_k": 30,
+      "repetition_penalty": 1.02
+    }
+  },
+  {
+    "config_id": "cfg05_qwen15b_filtered_json_lora16_lr2e5",
+    "model_name": "Qwen/Qwen2.5-1.5B-Instruct",
+    "schema_mode": "filtered",
+    "output_style": "sorted_compact",
+    "target_mode": "json_only",
+    "lora": {
+      "r": 16,
+      "alpha": 32,
+      "dropout": 0.05,
+      "target_modules": ["q_proj", "k_proj", "v_proj", "o_proj"]
+    },
+    "train": {
+      "learning_rate": 2e-5,
+      "lr_scheduler_type": "linear",
+      "per_device_train_batch_size": 2,
+      "per_device_eval_batch_size": 2,
+      "gradient_accumulation_steps": 8,
+      "max_steps": 280,
+      "logging_steps": 10,
+      "eval_steps": 20,
+      "bf16": true
+    },
+    "generation": {
+      "max_new_tokens": 220,
+      "temperature": 0.05,
+      "top_p": 0.9,
+      "top_k": 30,
+      "repetition_penalty": 1.02
+    }
+  }
+]

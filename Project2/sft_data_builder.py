@@ -34,6 +34,7 @@ def load_schema(db_id, schemas_dir):
     col_by_lc_table = {t: {} for t in table_names}
     col_ref = []
 
+    type_idx = 0
     for idx, (table_idx, col_name) in enumerate(column_names):
         if table_idx == -1:
             col_ref.append(None)
@@ -41,8 +42,9 @@ def load_schema(db_id, schemas_dir):
         table_name = table_names[table_idx]
         col_ref.append((table_name, col_name))
         cols_by_table[table_name].append(col_name)
-        if idx < len(column_types):
-            col_type_by_table[table_name][col_name] = column_types[idx]
+        if type_idx < len(column_types):
+            col_type_by_table[table_name][col_name] = column_types[type_idx]
+        type_idx += 1
         col_by_lc_table[table_name][col_name.lower()] = col_name
 
     pk_cols_by_table = {t: [] for t in table_names}
