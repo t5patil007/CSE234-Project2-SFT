@@ -89,7 +89,8 @@
     },
     "generation": {
       "max_new_tokens": 180,
-      "temperature": 0.0,
+      "do_sample": false,
+      "temperature": 1.0,
       "top_p": 1.0,
       "top_k": 0,
       "repetition_penalty": 1.0

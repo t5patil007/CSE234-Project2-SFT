@@ -1,0 +1,35 @@
+[
+  {
+    "config_id": "w2_cfg06_lora_decoding_json_stability_a100",
+    "train_mode": "lora",
+    "model_name": "Qwen/Qwen2.5-1.5B-Instruct",
+    "schema_mode": "minimal",
+    "output_style": "sorted_compact",
+    "target_mode": "json_only",
+    "lora": {
+      "r": 8,
+      "alpha": 16,
+      "dropout": 0.05,
+      "target_modules": ["q_proj", "v_proj"]
+    },
+    "train": {
+      "learning_rate": 3e-5,
+      "lr_scheduler_type": "linear",
+      "per_device_train_batch_size": 8,
+      "per_device_eval_batch_size": 8,
+      "gradient_accumulation_steps": 2,
+      "max_steps": 260,
+      "logging_steps": 20,
+      "eval_steps": 40,
+      "bf16": true
+    },
+    "generation": {
+      "max_new_tokens": 180,
+      "do_sample": false,
+      "temperature": 1.0,
+      "top_p": 1.0,
+      "top_k": 0,
+      "repetition_penalty": 1.0
+    }
+  }
+]
