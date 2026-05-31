@@ -167,12 +167,30 @@ def create_model(model_config):
 def build_rf_model_config(entry):
     from rapidfireai.automl import RFModelConfig, RFLoraConfig, RFSFTConfig
 
-    lora = RFLoraConfig(
-        r=entry["lora"]["r"],
-        lora_alpha=entry["lora"]["alpha"],
-        lora_dropout=entry["lora"]["dropout"],
-        target_modules=entry["lora"]["target_modules"],
-        bias="none",
+    train_mode = entry.get("train_mode", "lora")
+    if train_mode not in {"lora", "qlora", "full_ft"}:
+        raise ValueError(f"Unsupported train_mode: {train_mode}")
+
+    peft_config = None
+    if train_mode in {"lora", "qlora"}:
+        if "lora" not in entry:
+            raise ValueError(f"Config {entry.get('config_id')} missing 'lora' block for {train_mode}")
+        peft_config = RFLoraConfig(
+            r=entry["lora"]["r"],
+            lora_alpha=entry["lora"]["alpha"],
+            lora_dropout=entry["lora"]["dropout"],
+            target_modules=entry["lora"]["target_modules"],
+            bias="none",
+        )
+
+    model_kwargs = {"device_map": "auto", "torch_dtype": "auto", "use_cache": False}
+    model_kwargs.update(entry.get("model_kwargs", {}))
+    requested_save_strategy = entry["train"].get("save_strategy", "chunk")
+    hf_valid_save_strategies = {"no", "steps", "epoch", "best"}
+    hf_save_strategy = (
+        requested_save_strategy
+        if requested_save_strategy in hf_valid_save_strategies
+        else "epoch"
     )
     train = RFSFTConfig(
         output_dir=entry["artifact_dir"],
@@ -185,14 +203,24 @@ def build_rf_model_config(entry):
         logging_steps=entry["train"]["logging_steps"],
         eval_strategy="steps",
         eval_steps=entry["train"]["eval_steps"],
+        # RFSFTConfig validates HF save strategies only.
+        save_strategy=hf_save_strategy,
+        save_steps=entry["train"].get("save_steps", entry["train"]["eval_steps"]),
+        save_total_limit=entry["train"].get("save_total_limit", 3),
         bf16=entry["train"]["bf16"],
     )
+    if requested_save_strategy == "chunk":
+        # RapidFire's worker-level disk persistence checks for the literal
+        # "chunk" strategy in config_leaf when shared memory is enabled.
+        # Trainer-side HF config will still be forced to save_strategy="no"
+        # internally by RapidFire, so this marker is safe.
+        train.__dict__["save_strategy"] = "chunk"
     return RFModelConfig(
         model_name=entry["model_name"],
-        peft_config=lora,
+        peft_config=peft_config,
         training_args=train,
         model_type="causal_lm",
-        model_kwargs={"device_map": "auto", "torch_dtype": "auto", "use_cache": False},
+        model_kwargs=model_kwargs,
         formatting_func=row_formatting,
         compute_metrics=schema_link_metrics,
         generation_config=entry["generation"],
@@ -220,9 +248,11 @@ def run_experiment(entries, args):
         train_ds = load_hf_dataset(str(train_path))
         eval_ds = load_hf_dataset(str(eval_path))
         prepared_entries = []
+        artifact_root = Path(args.artifact_root).resolve()
+        artifact_root.mkdir(parents=True, exist_ok=True)
         for entry in group_entries:
             copied = dict(entry)
-            copied["artifact_dir"] = str(Path(args.artifact_root) / entry["config_id"])
+            copied["artifact_dir"] = str((artifact_root / entry["config_id"]).resolve())
             Path(copied["artifact_dir"]).mkdir(parents=True, exist_ok=True)
             prepared_entries.append(copied)
         rf_configs = [build_rf_model_config(entry) for entry in prepared_entries]
