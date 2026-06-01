@@ -196,7 +196,6 @@ def build_rf_model_config(entry):
 
     model_kwargs = {"device_map": "auto", "torch_dtype": "auto", "use_cache": False}
     model_kwargs.update(entry.get("model_kwargs", {}))
-    # Default to explicit on-disk checkpointing for reliable adapter export.
     requested_save_strategy = entry["train"].get("save_strategy", "epoch")
     hf_valid_save_strategies = {"no", "steps", "epoch", "best"}
     hf_save_strategy = (
