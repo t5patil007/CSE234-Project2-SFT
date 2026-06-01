@@ -203,23 +203,32 @@ def build_rf_model_config(entry):
         if requested_save_strategy in hf_valid_save_strategies
         else "epoch"
     )
-    train = RFSFTConfig(
-        output_dir=entry["artifact_dir"],
-        learning_rate=entry["train"]["learning_rate"],
-        lr_scheduler_type=entry["train"]["lr_scheduler_type"],
-        per_device_train_batch_size=entry["train"]["per_device_train_batch_size"],
-        per_device_eval_batch_size=entry["train"]["per_device_eval_batch_size"],
-        gradient_accumulation_steps=entry["train"]["gradient_accumulation_steps"],
-        max_steps=entry["train"]["max_steps"],
-        logging_steps=entry["train"]["logging_steps"],
-        eval_strategy="steps",
-        eval_steps=entry["train"]["eval_steps"],
+    train_kwargs = {
+        "output_dir": entry["artifact_dir"],
+        "learning_rate": entry["train"]["learning_rate"],
+        "lr_scheduler_type": entry["train"]["lr_scheduler_type"],
+        "per_device_train_batch_size": entry["train"]["per_device_train_batch_size"],
+        "per_device_eval_batch_size": entry["train"]["per_device_eval_batch_size"],
+        "gradient_accumulation_steps": entry["train"]["gradient_accumulation_steps"],
+        "max_steps": entry["train"]["max_steps"],
+        "logging_steps": entry["train"]["logging_steps"],
         # RFSFTConfig validates HF save strategies only.
-        save_strategy=hf_save_strategy,
-        save_steps=entry["train"].get("save_steps", entry["train"]["eval_steps"]),
-        save_total_limit=entry["train"].get("save_total_limit", 3),
-        bf16=entry["train"]["bf16"],
-    )
+        "save_strategy": hf_save_strategy,
+        "save_total_limit": entry["train"].get("save_total_limit", 3),
+        "bf16": entry["train"]["bf16"],
+        "eval_strategy": entry["train"].get("eval_strategy", "steps"),
+    }
+    if "eval_steps" in entry["train"]:
+        train_kwargs["eval_steps"] = entry["train"]["eval_steps"]
+    if "save_steps" in entry["train"]:
+        train_kwargs["save_steps"] = entry["train"]["save_steps"]
+    elif "eval_steps" in entry["train"]:
+        train_kwargs["save_steps"] = entry["train"]["eval_steps"]
+    # Optional passthrough knobs used in some stronger configs.
+    for opt_key in ("max_length", "weight_decay", "max_grad_norm", "gradient_checkpointing", "warmup_ratio"):
+        if opt_key in entry["train"]:
+            train_kwargs[opt_key] = entry["train"][opt_key]
+    train = RFSFTConfig(**train_kwargs)
     if requested_save_strategy == "chunk":
         # RapidFire's worker-level disk persistence checks for the literal
         # "chunk" strategy in config_leaf when shared memory is enabled.
