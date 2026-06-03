@@ -1,0 +1,481 @@
+2026-06-02 11:23:12 | top3_augB_targeted_hard_20260602_093521 | experiment | INFO | experiment.py:104 | Experiment top3_augB_targeted_hard_20260602_093521 created with Experiment ID: 3 and Metric Experiment ID: 3 at /root/rapidfireai/rapidfire_experiments/top3_augB_targeted_hard_20260602_093521
+2026-06-02 11:23:12 | top3_augB_targeted_hard_20260602_093521 | experiment | INFO | experiment.py:106 | Running RapidFire AI version 0.15.2
+2026-06-02 11:23:13 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:67 | Found 1 workers/GPUs.
+2026-06-02 11:23:13 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | metric_rfmetric_manager.py:55 | Initialized MLflowMetricLogger: rf_mlflow
+2026-06-02 11:23:13 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:95 | Controller initialized
+2026-06-02 11:23:13 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:594 | Set experiment task to Create Models.
+2026-06-02 11:23:13 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:607 | Saved datasets to /root/rapidfireai/rapidfire_experiments/top3_augB_targeted_hard_20260602_093521/datasets.dill
+2026-06-02 11:23:13 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:613 | Set seed to 42
+2026-06-02 11:23:13 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | metric_rfmetric_manager.py:141 | Created MLflow run: f76df61123744d1eb21daeafc87c0bf1, 1
+2026-06-02 11:23:14 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:200 | Populated MetricLogger with model config info for run 1.
+2026-06-02 11:23:14 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:220 | Created 1 runs - 
+{   1: {   'additional_kwargs.generation_config.max_new_tokens': 220,
+           'additional_kwargs.generation_config.repetition_penalty': 1.02,
+           'additional_kwargs.generation_config.temperature': 0.05,
+           'additional_kwargs.generation_config.top_k': 30,
+           'additional_kwargs.generation_config.top_p': 0.9,
+           'model_kwargs.device_map': 'auto',
+           'model_kwargs.use_cache': False,
+           'model_name': 'Qwen/Qwen2.5-1.5B-Instruct',
+           'model_type': 'causal_lm',
+           'peft_params.bias': 'none',
+           'peft_params.lora_alpha': 32,
+           'peft_params.lora_dropout': 0.05,
+           'peft_params.r': 16,
+           'peft_params.target_modules': ['q_proj', 'k_proj', 'v_proj', 'o_proj'],
+           'tokenizer': None,
+           'tokenizer_kwargs': None,
+           'trainer_type': 'SFT',
+           'training_args.bf16': True,
+           'training_args.eval_steps': 40,
+           'training_args.eval_strategy': 'steps',
+           'training_args.gradient_accumulation_steps': 2,
+           'training_args.learning_rate': 2e-05,
+           'training_args.logging_steps': 20,
+           'training_args.lr_scheduler_type': 'linear',
+           'training_args.max_steps': 280,
+           'training_args.per_device_eval_batch_size': 8,
+           'training_args.per_device_train_batch_size': 8,
+           'training_args.save_steps': 40,
+           'training_args.save_strategy': 'chunk',
+           'training_args.save_total_limit': 3}}
+2026-06-02 11:23:14 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:223 | Got 1 runs for Initial.
+2026-06-02 11:23:14 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:227 | Completed creating models.
+2026-06-02 11:23:14 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:625 | Created models.
+2026-06-02 11:23:14 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:631 | Set experiment task to Training and Validation.
+2026-06-02 11:23:14 | top3_augB_targeted_hard_20260602_093521 | worker_manager | DEBUG | worker_manager.py:115 | Creating 1 worker processes...
+2026-06-02 11:23:14 | top3_augB_targeted_hard_20260602_093521 | worker_manager | DEBUG | worker_manager.py:121 | Starting worker processes in process group 19410
+2026-06-02 11:23:14 | top3_augB_targeted_hard_20260602_093521 | worker_manager | DEBUG | worker_manager.py:149 | Started Worker 0 with PID 19512
+2026-06-02 11:23:14 | top3_augB_targeted_hard_20260602_093521 | worker_manager | INFO | worker_manager.py:156 | Started 1 worker processes successfully
+2026-06-02 11:23:14 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:637 | Created 1 workers.
+2026-06-02 11:23:14 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:659 | Starting Training and Validation
+2026-06-02 11:23:14 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:886 | Scheduled run 1 on workers (0,) for chunk 0
+2026-06-02 11:23:24 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:157 | Worker 0 initialized with PID 19512
+2026-06-02 11:23:24 | top3_augB_targeted_hard_20260602_093521 | worker_0 | INFO | metric_rfmetric_manager.py:55 | Initialized MLflowMetricLogger: rf_mlflow
+2026-06-02 11:23:24 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:192 | Loaded datasets
+2026-06-02 11:23:24 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:667 | Received task WorkerTask.TRAIN_VAL for run 1
+2026-06-02 11:23:24 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:205 | Received run_fit on worker for run 1 with chunk 0
+2026-06-02 11:23:40 | top3_augB_targeted_hard_20260602_093521 | worker-0-shm | DEBUG | shm_manager.py:348 | Saved base_model for run Qwen/Qwen2.5-1.5B-Instruct
+2026-06-02 11:23:44 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:378 | Beginning training for run 1 on chunk 0
+2026-06-02 11:24:15 | top3_augB_targeted_hard_20260602_093521 | worker-0-shm | DEBUG | shm_manager.py:445 | Checkpoint update:0 in-place, 7 new
+2026-06-02 11:24:15 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:473 | Saved checkpoint to shared memory for run 1 on chunk 0
+2026-06-02 11:24:17 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:714 | Completed task: run 1, chunk 0 on workers (0,)
+2026-06-02 11:24:17 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:717 | Run 1 completed steps - 25/280
+2026-06-02 11:24:17 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:773 | Run 1 has completed epoch (1/1 chunks)
+2026-06-02 11:24:17 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:886 | Scheduled run 1 on workers (0,) for chunk 0
+2026-06-02 11:24:17 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:667 | Received task WorkerTask.TRAIN_VAL for run 1
+2026-06-02 11:24:17 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:205 | Received run_fit on worker for run 1 with chunk 0
+2026-06-02 11:24:24 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:378 | Beginning training for run 1 on chunk 0
+2026-06-02 11:26:39 | top3_augB_targeted_hard_20260602_093521 | worker-0-shm | DEBUG | shm_manager.py:445 | Checkpoint update:896 in-place, 0 new
+2026-06-02 11:26:39 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:473 | Saved checkpoint to shared memory for run 1 on chunk 0
+2026-06-02 11:26:41 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:714 | Completed task: run 1, chunk 0 on workers (0,)
+2026-06-02 11:26:41 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:717 | Run 1 completed steps - 50/280
+2026-06-02 11:26:41 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:773 | Run 1 has completed epoch (1/1 chunks)
+2026-06-02 11:26:41 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:886 | Scheduled run 1 on workers (0,) for chunk 0
+2026-06-02 11:26:41 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:667 | Received task WorkerTask.TRAIN_VAL for run 1
+2026-06-02 11:26:41 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:205 | Received run_fit on worker for run 1 with chunk 0
+2026-06-02 11:26:49 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:378 | Beginning training for run 1 on chunk 0
+2026-06-02 11:27:20 | top3_augB_targeted_hard_20260602_093521 | worker-0-shm | DEBUG | shm_manager.py:445 | Checkpoint update:896 in-place, 0 new
+2026-06-02 11:27:20 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:473 | Saved checkpoint to shared memory for run 1 on chunk 0
+2026-06-02 11:27:22 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:714 | Completed task: run 1, chunk 0 on workers (0,)
+2026-06-02 11:27:22 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:717 | Run 1 completed steps - 75/280
+2026-06-02 11:27:22 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:773 | Run 1 has completed epoch (1/1 chunks)
+2026-06-02 11:27:22 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:886 | Scheduled run 1 on workers (0,) for chunk 0
+2026-06-02 11:27:22 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:667 | Received task WorkerTask.TRAIN_VAL for run 1
+2026-06-02 11:27:22 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:205 | Received run_fit on worker for run 1 with chunk 0
+2026-06-02 11:27:29 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:378 | Beginning training for run 1 on chunk 0
+2026-06-02 11:29:45 | top3_augB_targeted_hard_20260602_093521 | worker-0-shm | DEBUG | shm_manager.py:445 | Checkpoint update:896 in-place, 0 new
+2026-06-02 11:29:45 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:473 | Saved checkpoint to shared memory for run 1 on chunk 0
+2026-06-02 11:29:47 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:714 | Completed task: run 1, chunk 0 on workers (0,)
+2026-06-02 11:29:47 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:717 | Run 1 completed steps - 100/280
+2026-06-02 11:29:47 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:773 | Run 1 has completed epoch (1/1 chunks)
+2026-06-02 11:29:47 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:886 | Scheduled run 1 on workers (0,) for chunk 0
+2026-06-02 11:29:47 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:667 | Received task WorkerTask.TRAIN_VAL for run 1
+2026-06-02 11:29:47 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:205 | Received run_fit on worker for run 1 with chunk 0
+2026-06-02 11:29:55 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:378 | Beginning training for run 1 on chunk 0
+2026-06-02 11:32:09 | top3_augB_targeted_hard_20260602_093521 | worker-0-shm | DEBUG | shm_manager.py:445 | Checkpoint update:896 in-place, 0 new
+2026-06-02 11:32:09 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:473 | Saved checkpoint to shared memory for run 1 on chunk 0
+2026-06-02 11:32:10 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:714 | Completed task: run 1, chunk 0 on workers (0,)
+2026-06-02 11:32:10 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:717 | Run 1 completed steps - 125/280
+2026-06-02 11:32:10 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:773 | Run 1 has completed epoch (1/1 chunks)
+2026-06-02 11:32:10 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:886 | Scheduled run 1 on workers (0,) for chunk 0
+2026-06-02 11:32:11 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:667 | Received task WorkerTask.TRAIN_VAL for run 1
+2026-06-02 11:32:11 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:205 | Received run_fit on worker for run 1 with chunk 0
+2026-06-02 11:32:18 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:378 | Beginning training for run 1 on chunk 0
+2026-06-02 11:32:49 | top3_augB_targeted_hard_20260602_093521 | worker-0-shm | DEBUG | shm_manager.py:445 | Checkpoint update:896 in-place, 0 new
+2026-06-02 11:32:49 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:473 | Saved checkpoint to shared memory for run 1 on chunk 0
+2026-06-02 11:32:51 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:714 | Completed task: run 1, chunk 0 on workers (0,)
+2026-06-02 11:32:51 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:717 | Run 1 completed steps - 150/280
+2026-06-02 11:32:51 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:773 | Run 1 has completed epoch (1/1 chunks)
+2026-06-02 11:32:51 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:886 | Scheduled run 1 on workers (0,) for chunk 0
+2026-06-02 11:32:51 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:667 | Received task WorkerTask.TRAIN_VAL for run 1
+2026-06-02 11:32:51 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:205 | Received run_fit on worker for run 1 with chunk 0
+2026-06-02 11:32:58 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:378 | Beginning training for run 1 on chunk 0
+2026-06-02 11:35:14 | top3_augB_targeted_hard_20260602_093521 | worker-0-shm | DEBUG | shm_manager.py:445 | Checkpoint update:896 in-place, 0 new
+2026-06-02 11:35:14 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:473 | Saved checkpoint to shared memory for run 1 on chunk 0
+2026-06-02 11:35:15 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:714 | Completed task: run 1, chunk 0 on workers (0,)
+2026-06-02 11:35:15 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:717 | Run 1 completed steps - 175/280
+2026-06-02 11:35:15 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:773 | Run 1 has completed epoch (1/1 chunks)
+2026-06-02 11:35:15 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:886 | Scheduled run 1 on workers (0,) for chunk 0
+2026-06-02 11:35:16 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:667 | Received task WorkerTask.TRAIN_VAL for run 1
+2026-06-02 11:35:16 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:205 | Received run_fit on worker for run 1 with chunk 0
+2026-06-02 11:35:24 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:378 | Beginning training for run 1 on chunk 0
+2026-06-02 11:37:39 | top3_augB_targeted_hard_20260602_093521 | worker-0-shm | DEBUG | shm_manager.py:445 | Checkpoint update:896 in-place, 0 new
+2026-06-02 11:37:39 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:473 | Saved checkpoint to shared memory for run 1 on chunk 0
+2026-06-02 11:37:41 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:714 | Completed task: run 1, chunk 0 on workers (0,)
+2026-06-02 11:37:41 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:717 | Run 1 completed steps - 200/280
+2026-06-02 11:37:41 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:773 | Run 1 has completed epoch (1/1 chunks)
+2026-06-02 11:37:41 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:886 | Scheduled run 1 on workers (0,) for chunk 0
+2026-06-02 11:37:41 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:667 | Received task WorkerTask.TRAIN_VAL for run 1
+2026-06-02 11:37:41 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:205 | Received run_fit on worker for run 1 with chunk 0
+2026-06-02 11:37:49 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:378 | Beginning training for run 1 on chunk 0
+2026-06-02 11:38:20 | top3_augB_targeted_hard_20260602_093521 | worker-0-shm | DEBUG | shm_manager.py:445 | Checkpoint update:896 in-place, 0 new
+2026-06-02 11:38:20 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:473 | Saved checkpoint to shared memory for run 1 on chunk 0
+2026-06-02 11:38:22 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:714 | Completed task: run 1, chunk 0 on workers (0,)
+2026-06-02 11:38:22 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:717 | Run 1 completed steps - 225/280
+2026-06-02 11:38:22 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:773 | Run 1 has completed epoch (1/1 chunks)
+2026-06-02 11:38:22 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:886 | Scheduled run 1 on workers (0,) for chunk 0
+2026-06-02 11:38:22 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:667 | Received task WorkerTask.TRAIN_VAL for run 1
+2026-06-02 11:38:22 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:205 | Received run_fit on worker for run 1 with chunk 0
+2026-06-02 11:38:29 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:378 | Beginning training for run 1 on chunk 0
+2026-06-02 11:40:44 | top3_augB_targeted_hard_20260602_093521 | worker-0-shm | DEBUG | shm_manager.py:445 | Checkpoint update:896 in-place, 0 new
+2026-06-02 11:40:44 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:473 | Saved checkpoint to shared memory for run 1 on chunk 0
+2026-06-02 11:40:46 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:714 | Completed task: run 1, chunk 0 on workers (0,)
+2026-06-02 11:40:46 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:717 | Run 1 completed steps - 250/280
+2026-06-02 11:40:46 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:773 | Run 1 has completed epoch (1/1 chunks)
+2026-06-02 11:40:46 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:886 | Scheduled run 1 on workers (0,) for chunk 0
+2026-06-02 11:40:46 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:667 | Received task WorkerTask.TRAIN_VAL for run 1
+2026-06-02 11:40:46 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:205 | Received run_fit on worker for run 1 with chunk 0
+2026-06-02 11:40:53 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:378 | Beginning training for run 1 on chunk 0
+2026-06-02 11:41:24 | top3_augB_targeted_hard_20260602_093521 | worker-0-shm | DEBUG | shm_manager.py:445 | Checkpoint update:896 in-place, 0 new
+2026-06-02 11:41:24 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:473 | Saved checkpoint to shared memory for run 1 on chunk 0
+2026-06-02 11:41:26 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:714 | Completed task: run 1, chunk 0 on workers (0,)
+2026-06-02 11:41:26 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:717 | Run 1 completed steps - 275/280
+2026-06-02 11:41:26 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:773 | Run 1 has completed epoch (1/1 chunks)
+2026-06-02 11:41:26 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:886 | Scheduled run 1 on workers (0,) for chunk 0
+2026-06-02 11:41:26 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:667 | Received task WorkerTask.TRAIN_VAL for run 1
+2026-06-02 11:41:26 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:205 | Received run_fit on worker for run 1 with chunk 0
+2026-06-02 11:41:33 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:378 | Beginning training for run 1 on chunk 0
+2026-06-02 11:43:24 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:453 | Saved final checkpoint to disk for run 1 on chunk 0
+2026-06-02 11:43:26 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:714 | Completed task: run 1, chunk 0 on workers (0,)
+2026-06-02 11:43:26 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:717 | Run 1 completed steps - 280/280
+2026-06-02 11:43:26 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:760 | Run 1 has completed all its epochs - steps 280/280
+2026-06-02 11:43:26 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:848 | Scheduler indicates all runs have completed all chunks
+2026-06-02 11:43:26 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:904 | Set experiment task to Idle.
+2026-06-02 11:43:26 | top3_augB_targeted_hard_20260602_093521 | worker_manager | DEBUG | worker_manager.py:163 | WorkerManager shutdown initiated...
+2026-06-02 11:43:26 | top3_augB_targeted_hard_20260602_093521 | worker_manager | DEBUG | worker_manager.py:167 | Signaling graceful shutdown...
+2026-06-02 11:43:26 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:712 | Worker 0 shutdown requested
+2026-06-02 11:43:26 | top3_augB_targeted_hard_20260602_093521 | worker_0 | INFO | worker_manager.py:50 | Worker 0 process exiting
+2026-06-02 11:43:26 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:712 | Worker 0 shutdown requested
+2026-06-02 11:43:28 | top3_augB_targeted_hard_20260602_093521 | worker_manager | DEBUG | worker_manager.py:186 | All workers shutdown gracefully
+2026-06-02 11:43:28 | top3_augB_targeted_hard_20260602_093521 | worker_manager | DEBUG | worker_manager.py:163 | WorkerManager shutdown initiated...
+2026-06-02 11:43:28 | top3_augB_targeted_hard_20260602_093521 | worker_manager | DEBUG | worker_manager.py:167 | Signaling graceful shutdown...
+2026-06-02 11:43:28 | top3_augB_targeted_hard_20260602_093521 | worker_manager | DEBUG | worker_manager.py:186 | All workers shutdown gracefully
+2026-06-02 11:43:29 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:67 | Found 1 workers/GPUs.
+2026-06-02 11:43:29 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | metric_rfmetric_manager.py:55 | Initialized MLflowMetricLogger: rf_mlflow
+2026-06-02 11:43:29 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:95 | Controller initialized
+2026-06-02 11:43:29 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:594 | Set experiment task to Create Models.
+2026-06-02 11:43:29 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:607 | Saved datasets to /root/rapidfireai/rapidfire_experiments/top3_augB_targeted_hard_20260602_093521/datasets.dill
+2026-06-02 11:43:29 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:613 | Set seed to 42
+2026-06-02 11:43:29 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | metric_rfmetric_manager.py:141 | Created MLflow run: 11f9424216ec4bb6b416a29603fd1f20, 2
+2026-06-02 11:43:29 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:200 | Populated MetricLogger with model config info for run 2.
+2026-06-02 11:43:29 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:220 | Created 1 runs - 
+{   2: {   'additional_kwargs.generation_config.max_new_tokens': 220,
+           'additional_kwargs.generation_config.repetition_penalty': 1.02,
+           'additional_kwargs.generation_config.temperature': 0.03,
+           'additional_kwargs.generation_config.top_k': 20,
+           'additional_kwargs.generation_config.top_p': 0.9,
+           'model_kwargs.device_map': 'auto',
+           'model_kwargs.use_cache': False,
+           'model_name': 'Qwen/Qwen2.5-1.5B-Instruct',
+           'model_type': 'causal_lm',
+           'peft_params.bias': 'none',
+           'peft_params.lora_alpha': 32,
+           'peft_params.lora_dropout': 0.05,
+           'peft_params.r': 16,
+           'peft_params.target_modules': ['q_proj', 'k_proj', 'v_proj', 'o_proj'],
+           'tokenizer': None,
+           'tokenizer_kwargs': None,
+           'trainer_type': 'SFT',
+           'training_args.bf16': True,
+           'training_args.eval_steps': 40,
+           'training_args.eval_strategy': 'steps',
+           'training_args.gradient_accumulation_steps': 2,
+           'training_args.learning_rate': 2e-05,
+           'training_args.logging_steps': 20,
+           'training_args.lr_scheduler_type': 'linear',
+           'training_args.max_steps': 280,
+           'training_args.per_device_eval_batch_size': 6,
+           'training_args.per_device_train_batch_size': 6,
+           'training_args.save_steps': 40,
+           'training_args.save_strategy': 'chunk',
+           'training_args.save_total_limit': 3}}
+2026-06-02 11:43:29 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:223 | Got 1 runs for Initial.
+2026-06-02 11:43:29 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:227 | Completed creating models.
+2026-06-02 11:43:29 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:625 | Created models.
+2026-06-02 11:43:29 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:631 | Set experiment task to Training and Validation.
+2026-06-02 11:43:29 | top3_augB_targeted_hard_20260602_093521 | worker_manager | DEBUG | worker_manager.py:115 | Creating 1 worker processes...
+2026-06-02 11:43:29 | top3_augB_targeted_hard_20260602_093521 | worker_manager | DEBUG | worker_manager.py:121 | Starting worker processes in process group 19410
+2026-06-02 11:43:29 | top3_augB_targeted_hard_20260602_093521 | worker_manager | DEBUG | worker_manager.py:149 | Started Worker 0 with PID 21958
+2026-06-02 11:43:29 | top3_augB_targeted_hard_20260602_093521 | worker_manager | INFO | worker_manager.py:156 | Started 1 worker processes successfully
+2026-06-02 11:43:29 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:637 | Created 1 workers.
+2026-06-02 11:43:29 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:659 | Starting Training and Validation
+2026-06-02 11:43:29 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:886 | Scheduled run 2 on workers (0,) for chunk 0
+2026-06-02 11:43:39 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:157 | Worker 0 initialized with PID 21958
+2026-06-02 11:43:39 | top3_augB_targeted_hard_20260602_093521 | worker_0 | INFO | metric_rfmetric_manager.py:55 | Initialized MLflowMetricLogger: rf_mlflow
+2026-06-02 11:43:40 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:192 | Loaded datasets
+2026-06-02 11:43:40 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:667 | Received task WorkerTask.TRAIN_VAL for run 2
+2026-06-02 11:43:40 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:205 | Received run_fit on worker for run 2 with chunk 0
+2026-06-02 11:43:56 | top3_augB_targeted_hard_20260602_093521 | worker-0-shm | DEBUG | shm_manager.py:348 | Saved base_model for run Qwen/Qwen2.5-1.5B-Instruct
+2026-06-02 11:43:57 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:378 | Beginning training for run 2 on chunk 0
+2026-06-02 11:44:25 | top3_augB_targeted_hard_20260602_093521 | worker-0-shm | DEBUG | shm_manager.py:445 | Checkpoint update:0 in-place, 7 new
+2026-06-02 11:44:25 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:473 | Saved checkpoint to shared memory for run 2 on chunk 0
+2026-06-02 11:44:27 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:714 | Completed task: run 2, chunk 0 on workers (0,)
+2026-06-02 11:44:27 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:717 | Run 2 completed steps - 33/280
+2026-06-02 11:44:27 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:773 | Run 2 has completed epoch (1/1 chunks)
+2026-06-02 11:44:27 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:886 | Scheduled run 2 on workers (0,) for chunk 0
+2026-06-02 11:44:28 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:667 | Received task WorkerTask.TRAIN_VAL for run 2
+2026-06-02 11:44:28 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:205 | Received run_fit on worker for run 2 with chunk 0
+2026-06-02 11:44:32 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:378 | Beginning training for run 2 on chunk 0
+2026-06-02 11:47:13 | top3_augB_targeted_hard_20260602_093521 | worker-0-shm | DEBUG | shm_manager.py:445 | Checkpoint update:896 in-place, 0 new
+2026-06-02 11:47:13 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:473 | Saved checkpoint to shared memory for run 2 on chunk 0
+2026-06-02 11:47:14 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:714 | Completed task: run 2, chunk 0 on workers (0,)
+2026-06-02 11:47:14 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:717 | Run 2 completed steps - 66/280
+2026-06-02 11:47:14 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:773 | Run 2 has completed epoch (1/1 chunks)
+2026-06-02 11:47:14 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:886 | Scheduled run 2 on workers (0,) for chunk 0
+2026-06-02 11:47:15 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:667 | Received task WorkerTask.TRAIN_VAL for run 2
+2026-06-02 11:47:15 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:205 | Received run_fit on worker for run 2 with chunk 0
+2026-06-02 11:47:20 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:378 | Beginning training for run 2 on chunk 0
+2026-06-02 11:50:00 | top3_augB_targeted_hard_20260602_093521 | worker-0-shm | DEBUG | shm_manager.py:445 | Checkpoint update:896 in-place, 0 new
+2026-06-02 11:50:00 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:473 | Saved checkpoint to shared memory for run 2 on chunk 0
+2026-06-02 11:50:02 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:714 | Completed task: run 2, chunk 0 on workers (0,)
+2026-06-02 11:50:02 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:717 | Run 2 completed steps - 99/280
+2026-06-02 11:50:02 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:773 | Run 2 has completed epoch (1/1 chunks)
+2026-06-02 11:50:02 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:886 | Scheduled run 2 on workers (0,) for chunk 0
+2026-06-02 11:50:02 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:667 | Received task WorkerTask.TRAIN_VAL for run 2
+2026-06-02 11:50:02 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:205 | Received run_fit on worker for run 2 with chunk 0
+2026-06-02 11:50:07 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:378 | Beginning training for run 2 on chunk 0
+2026-06-02 11:52:46 | top3_augB_targeted_hard_20260602_093521 | worker-0-shm | DEBUG | shm_manager.py:445 | Checkpoint update:896 in-place, 0 new
+2026-06-02 11:52:46 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:473 | Saved checkpoint to shared memory for run 2 on chunk 0
+2026-06-02 11:52:48 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:714 | Completed task: run 2, chunk 0 on workers (0,)
+2026-06-02 11:52:48 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:717 | Run 2 completed steps - 132/280
+2026-06-02 11:52:48 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:773 | Run 2 has completed epoch (1/1 chunks)
+2026-06-02 11:52:48 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:886 | Scheduled run 2 on workers (0,) for chunk 0
+2026-06-02 11:52:48 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:667 | Received task WorkerTask.TRAIN_VAL for run 2
+2026-06-02 11:52:48 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:205 | Received run_fit on worker for run 2 with chunk 0
+2026-06-02 11:52:53 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:378 | Beginning training for run 2 on chunk 0
+2026-06-02 11:55:33 | top3_augB_targeted_hard_20260602_093521 | worker-0-shm | DEBUG | shm_manager.py:445 | Checkpoint update:896 in-place, 0 new
+2026-06-02 11:55:33 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:473 | Saved checkpoint to shared memory for run 2 on chunk 0
+2026-06-02 11:55:35 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:714 | Completed task: run 2, chunk 0 on workers (0,)
+2026-06-02 11:55:35 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:717 | Run 2 completed steps - 165/280
+2026-06-02 11:55:35 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:773 | Run 2 has completed epoch (1/1 chunks)
+2026-06-02 11:55:35 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:886 | Scheduled run 2 on workers (0,) for chunk 0
+2026-06-02 11:55:36 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:667 | Received task WorkerTask.TRAIN_VAL for run 2
+2026-06-02 11:55:36 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:205 | Received run_fit on worker for run 2 with chunk 0
+2026-06-02 11:55:41 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:378 | Beginning training for run 2 on chunk 0
+2026-06-02 11:56:09 | top3_augB_targeted_hard_20260602_093521 | worker-0-shm | DEBUG | shm_manager.py:445 | Checkpoint update:896 in-place, 0 new
+2026-06-02 11:56:09 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:473 | Saved checkpoint to shared memory for run 2 on chunk 0
+2026-06-02 11:56:10 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:714 | Completed task: run 2, chunk 0 on workers (0,)
+2026-06-02 11:56:10 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:717 | Run 2 completed steps - 198/280
+2026-06-02 11:56:10 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:773 | Run 2 has completed epoch (1/1 chunks)
+2026-06-02 11:56:10 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:886 | Scheduled run 2 on workers (0,) for chunk 0
+2026-06-02 11:56:11 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:667 | Received task WorkerTask.TRAIN_VAL for run 2
+2026-06-02 11:56:11 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:205 | Received run_fit on worker for run 2 with chunk 0
+2026-06-02 11:56:16 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:378 | Beginning training for run 2 on chunk 0
+2026-06-02 11:58:55 | top3_augB_targeted_hard_20260602_093521 | worker-0-shm | DEBUG | shm_manager.py:445 | Checkpoint update:896 in-place, 0 new
+2026-06-02 11:58:55 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:473 | Saved checkpoint to shared memory for run 2 on chunk 0
+2026-06-02 11:58:56 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:714 | Completed task: run 2, chunk 0 on workers (0,)
+2026-06-02 11:58:56 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:717 | Run 2 completed steps - 231/280
+2026-06-02 11:58:56 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:773 | Run 2 has completed epoch (1/1 chunks)
+2026-06-02 11:58:56 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:886 | Scheduled run 2 on workers (0,) for chunk 0
+2026-06-02 11:58:57 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:667 | Received task WorkerTask.TRAIN_VAL for run 2
+2026-06-02 11:58:57 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:205 | Received run_fit on worker for run 2 with chunk 0
+2026-06-02 11:59:01 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:378 | Beginning training for run 2 on chunk 0
+2026-06-02 12:01:42 | top3_augB_targeted_hard_20260602_093521 | worker-0-shm | DEBUG | shm_manager.py:445 | Checkpoint update:896 in-place, 0 new
+2026-06-02 12:01:42 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:473 | Saved checkpoint to shared memory for run 2 on chunk 0
+2026-06-02 12:01:43 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:714 | Completed task: run 2, chunk 0 on workers (0,)
+2026-06-02 12:01:43 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:717 | Run 2 completed steps - 264/280
+2026-06-02 12:01:43 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:773 | Run 2 has completed epoch (1/1 chunks)
+2026-06-02 12:01:44 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:886 | Scheduled run 2 on workers (0,) for chunk 0
+2026-06-02 12:01:44 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:667 | Received task WorkerTask.TRAIN_VAL for run 2
+2026-06-02 12:01:44 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:205 | Received run_fit on worker for run 2 with chunk 0
+2026-06-02 12:01:49 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:378 | Beginning training for run 2 on chunk 0
+2026-06-02 12:04:16 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:453 | Saved final checkpoint to disk for run 2 on chunk 0
+2026-06-02 12:04:17 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:714 | Completed task: run 2, chunk 0 on workers (0,)
+2026-06-02 12:04:17 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:717 | Run 2 completed steps - 280/280
+2026-06-02 12:04:17 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:760 | Run 2 has completed all its epochs - steps 280/280
+2026-06-02 12:04:17 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:848 | Scheduler indicates all runs have completed all chunks
+2026-06-02 12:04:17 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:904 | Set experiment task to Idle.
+2026-06-02 12:04:17 | top3_augB_targeted_hard_20260602_093521 | worker_manager | DEBUG | worker_manager.py:163 | WorkerManager shutdown initiated...
+2026-06-02 12:04:17 | top3_augB_targeted_hard_20260602_093521 | worker_manager | DEBUG | worker_manager.py:167 | Signaling graceful shutdown...
+2026-06-02 12:04:18 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:712 | Worker 0 shutdown requested
+2026-06-02 12:04:18 | top3_augB_targeted_hard_20260602_093521 | worker_0 | INFO | worker_manager.py:50 | Worker 0 process exiting
+2026-06-02 12:04:18 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:712 | Worker 0 shutdown requested
+2026-06-02 12:04:19 | top3_augB_targeted_hard_20260602_093521 | worker_manager | DEBUG | worker_manager.py:186 | All workers shutdown gracefully
+2026-06-02 12:04:19 | top3_augB_targeted_hard_20260602_093521 | worker_manager | DEBUG | worker_manager.py:163 | WorkerManager shutdown initiated...
+2026-06-02 12:04:19 | top3_augB_targeted_hard_20260602_093521 | worker_manager | DEBUG | worker_manager.py:167 | Signaling graceful shutdown...
+2026-06-02 12:04:19 | top3_augB_targeted_hard_20260602_093521 | worker_manager | DEBUG | worker_manager.py:186 | All workers shutdown gracefully
+2026-06-02 12:04:20 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:67 | Found 1 workers/GPUs.
+2026-06-02 12:04:20 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | metric_rfmetric_manager.py:55 | Initialized MLflowMetricLogger: rf_mlflow
+2026-06-02 12:04:20 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:95 | Controller initialized
+2026-06-02 12:04:20 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:594 | Set experiment task to Create Models.
+2026-06-02 12:04:20 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:607 | Saved datasets to /root/rapidfireai/rapidfire_experiments/top3_augB_targeted_hard_20260602_093521/datasets.dill
+2026-06-02 12:04:20 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:613 | Set seed to 42
+2026-06-02 12:04:20 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | metric_rfmetric_manager.py:141 | Created MLflow run: 9ae64c04eec44c3b8cf29cf5dfd2d1ea, 3
+2026-06-02 12:04:20 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:200 | Populated MetricLogger with model config info for run 3.
+2026-06-02 12:04:20 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:220 | Created 1 runs - 
+{   3: {   'additional_kwargs.generation_config.max_new_tokens': 180,
+           'additional_kwargs.generation_config.repetition_penalty': 1.01,
+           'additional_kwargs.generation_config.temperature': 0.03,
+           'additional_kwargs.generation_config.top_k': 20,
+           'additional_kwargs.generation_config.top_p': 0.9,
+           'model_kwargs.device_map': 'auto',
+           'model_kwargs.use_cache': False,
+           'model_name': 'Qwen/Qwen2.5-0.5B-Instruct',
+           'model_type': 'causal_lm',
+           'tokenizer': None,
+           'tokenizer_kwargs': None,
+           'trainer_type': 'SFT',
+           'training_args.bf16': True,
+           'training_args.eval_steps': 40,
+           'training_args.eval_strategy': 'steps',
+           'training_args.gradient_accumulation_steps': 2,
+           'training_args.learning_rate': 1e-05,
+           'training_args.logging_steps': 20,
+           'training_args.lr_scheduler_type': 'linear',
+           'training_args.max_steps': 260,
+           'training_args.per_device_eval_batch_size': 12,
+           'training_args.per_device_train_batch_size': 12,
+           'training_args.save_steps': 40,
+           'training_args.save_strategy': 'chunk',
+           'training_args.save_total_limit': 3}}
+2026-06-02 12:04:20 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:223 | Got 1 runs for Initial.
+2026-06-02 12:04:20 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:227 | Completed creating models.
+2026-06-02 12:04:20 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:625 | Created models.
+2026-06-02 12:04:20 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:631 | Set experiment task to Training and Validation.
+2026-06-02 12:04:20 | top3_augB_targeted_hard_20260602_093521 | worker_manager | DEBUG | worker_manager.py:115 | Creating 1 worker processes...
+2026-06-02 12:04:20 | top3_augB_targeted_hard_20260602_093521 | worker_manager | DEBUG | worker_manager.py:121 | Starting worker processes in process group 19410
+2026-06-02 12:04:20 | top3_augB_targeted_hard_20260602_093521 | worker_manager | DEBUG | worker_manager.py:149 | Started Worker 0 with PID 24574
+2026-06-02 12:04:20 | top3_augB_targeted_hard_20260602_093521 | worker_manager | INFO | worker_manager.py:156 | Started 1 worker processes successfully
+2026-06-02 12:04:20 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:637 | Created 1 workers.
+2026-06-02 12:04:20 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:659 | Starting Training and Validation
+2026-06-02 12:04:20 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:886 | Scheduled run 3 on workers (0,) for chunk 0
+2026-06-02 12:04:30 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:157 | Worker 0 initialized with PID 24574
+2026-06-02 12:04:30 | top3_augB_targeted_hard_20260602_093521 | worker_0 | INFO | metric_rfmetric_manager.py:55 | Initialized MLflowMetricLogger: rf_mlflow
+2026-06-02 12:04:30 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:192 | Loaded datasets
+2026-06-02 12:04:30 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:667 | Received task WorkerTask.TRAIN_VAL for run 3
+2026-06-02 12:04:30 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:205 | Received run_fit on worker for run 3 with chunk 0
+2026-06-02 12:04:33 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:378 | Beginning training for run 3 on chunk 0
+2026-06-02 12:04:55 | top3_augB_targeted_hard_20260602_093521 | worker-0-shm | DEBUG | shm_manager.py:445 | Checkpoint update:0 in-place, 5 new
+2026-06-02 12:05:04 | top3_augB_targeted_hard_20260602_093521 | worker-0-shm | DEBUG | shm_manager.py:348 | Saved full_model for run 3
+2026-06-02 12:05:04 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:473 | Saved checkpoint to shared memory for run 3 on chunk 0
+2026-06-02 12:05:05 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:714 | Completed task: run 3, chunk 0 on workers (0,)
+2026-06-02 12:05:05 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:717 | Run 3 completed steps - 17/260
+2026-06-02 12:05:05 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:773 | Run 3 has completed epoch (1/1 chunks)
+2026-06-02 12:05:05 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:886 | Scheduled run 3 on workers (0,) for chunk 0
+2026-06-02 12:05:06 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:667 | Received task WorkerTask.TRAIN_VAL for run 3
+2026-06-02 12:05:06 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:205 | Received run_fit on worker for run 3 with chunk 0
+2026-06-02 12:05:12 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:378 | Beginning training for run 3 on chunk 0
+2026-06-02 12:05:31 | top3_augB_targeted_hard_20260602_093521 | worker-0-shm | DEBUG | shm_manager.py:445 | Checkpoint update:870 in-place, 0 new
+2026-06-02 12:05:34 | top3_augB_targeted_hard_20260602_093521 | worker-0-shm | DEBUG | shm_manager.py:348 | Saved full_model for run 3
+2026-06-02 12:05:34 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:473 | Saved checkpoint to shared memory for run 3 on chunk 0
+2026-06-02 12:05:36 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:714 | Completed task: run 3, chunk 0 on workers (0,)
+2026-06-02 12:05:36 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:717 | Run 3 completed steps - 34/260
+2026-06-02 12:05:36 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:773 | Run 3 has completed epoch (1/1 chunks)
+2026-06-02 12:05:36 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:886 | Scheduled run 3 on workers (0,) for chunk 0
+2026-06-02 12:05:37 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:667 | Received task WorkerTask.TRAIN_VAL for run 3
+2026-06-02 12:05:37 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:205 | Received run_fit on worker for run 3 with chunk 0
+2026-06-02 12:05:43 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:378 | Beginning training for run 3 on chunk 0
+2026-06-02 12:06:32 | top3_augB_targeted_hard_20260602_093521 | worker-0-shm | DEBUG | shm_manager.py:445 | Checkpoint update:870 in-place, 0 new
+2026-06-02 12:06:35 | top3_augB_targeted_hard_20260602_093521 | worker-0-shm | DEBUG | shm_manager.py:348 | Saved full_model for run 3
+2026-06-02 12:06:35 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:473 | Saved checkpoint to shared memory for run 3 on chunk 0
+2026-06-02 12:06:36 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:714 | Completed task: run 3, chunk 0 on workers (0,)
+2026-06-02 12:06:36 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:717 | Run 3 completed steps - 51/260
+2026-06-02 12:06:36 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:773 | Run 3 has completed epoch (1/1 chunks)
+2026-06-02 12:06:36 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:886 | Scheduled run 3 on workers (0,) for chunk 0
+2026-06-02 12:06:37 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:667 | Received task WorkerTask.TRAIN_VAL for run 3
+2026-06-02 12:06:37 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:205 | Received run_fit on worker for run 3 with chunk 0
+2026-06-02 12:06:43 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:378 | Beginning training for run 3 on chunk 0
+2026-06-02 12:07:02 | top3_augB_targeted_hard_20260602_093521 | worker-0-shm | DEBUG | shm_manager.py:445 | Checkpoint update:870 in-place, 0 new
+2026-06-02 12:07:05 | top3_augB_targeted_hard_20260602_093521 | worker-0-shm | DEBUG | shm_manager.py:348 | Saved full_model for run 3
+2026-06-02 12:07:05 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:473 | Saved checkpoint to shared memory for run 3 on chunk 0
+2026-06-02 12:07:07 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:714 | Completed task: run 3, chunk 0 on workers (0,)
+2026-06-02 12:07:07 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:717 | Run 3 completed steps - 68/260
+2026-06-02 12:07:07 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:773 | Run 3 has completed epoch (1/1 chunks)
+2026-06-02 12:07:07 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:886 | Scheduled run 3 on workers (0,) for chunk 0
+2026-06-02 12:07:07 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:667 | Received task WorkerTask.TRAIN_VAL for run 3
+2026-06-02 12:07:07 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:205 | Received run_fit on worker for run 3 with chunk 0
+2026-06-02 12:07:13 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:378 | Beginning training for run 3 on chunk 0
+2026-06-02 12:08:02 | top3_augB_targeted_hard_20260602_093521 | worker-0-shm | DEBUG | shm_manager.py:445 | Checkpoint update:870 in-place, 0 new
+2026-06-02 12:08:05 | top3_augB_targeted_hard_20260602_093521 | worker-0-shm | DEBUG | shm_manager.py:348 | Saved full_model for run 3
+2026-06-02 12:08:05 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:473 | Saved checkpoint to shared memory for run 3 on chunk 0
+2026-06-02 12:08:07 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:714 | Completed task: run 3, chunk 0 on workers (0,)
+2026-06-02 12:08:07 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:717 | Run 3 completed steps - 85/260
+2026-06-02 12:08:07 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:773 | Run 3 has completed epoch (1/1 chunks)
+2026-06-02 12:08:07 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:886 | Scheduled run 3 on workers (0,) for chunk 0
+2026-06-02 12:08:07 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:667 | Received task WorkerTask.TRAIN_VAL for run 3
+2026-06-02 12:08:07 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:205 | Received run_fit on worker for run 3 with chunk 0
+2026-06-02 12:08:13 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:378 | Beginning training for run 3 on chunk 0
+2026-06-02 12:08:32 | top3_augB_targeted_hard_20260602_093521 | worker-0-shm | DEBUG | shm_manager.py:445 | Checkpoint update:870 in-place, 0 new
+2026-06-02 12:08:35 | top3_augB_targeted_hard_20260602_093521 | worker-0-shm | DEBUG | shm_manager.py:348 | Saved full_model for run 3
+2026-06-02 12:08:35 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:473 | Saved checkpoint to shared memory for run 3 on chunk 0
+2026-06-02 12:08:37 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:714 | Completed task: run 3, chunk 0 on workers (0,)
+2026-06-02 12:08:37 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:717 | Run 3 completed steps - 102/260
+2026-06-02 12:08:37 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:773 | Run 3 has completed epoch (1/1 chunks)
+2026-06-02 12:08:37 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:886 | Scheduled run 3 on workers (0,) for chunk 0
+2026-06-02 12:08:37 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:667 | Received task WorkerTask.TRAIN_VAL for run 3
+2026-06-02 12:08:37 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:205 | Received run_fit on worker for run 3 with chunk 0
+2026-06-02 12:08:43 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:378 | Beginning training for run 3 on chunk 0
+2026-06-02 12:09:02 | top3_augB_targeted_hard_20260602_093521 | worker-0-shm | DEBUG | shm_manager.py:445 | Checkpoint update:870 in-place, 0 new
+2026-06-02 12:09:05 | top3_augB_targeted_hard_20260602_093521 | worker-0-shm | DEBUG | shm_manager.py:348 | Saved full_model for run 3
+2026-06-02 12:09:05 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:473 | Saved checkpoint to shared memory for run 3 on chunk 0
+2026-06-02 12:09:07 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:714 | Completed task: run 3, chunk 0 on workers (0,)
+2026-06-02 12:09:07 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:717 | Run 3 completed steps - 119/260
+2026-06-02 12:09:07 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:773 | Run 3 has completed epoch (1/1 chunks)
+2026-06-02 12:09:07 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:886 | Scheduled run 3 on workers (0,) for chunk 0
+2026-06-02 12:09:08 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:667 | Received task WorkerTask.TRAIN_VAL for run 3
+2026-06-02 12:09:08 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:205 | Received run_fit on worker for run 3 with chunk 0
+2026-06-02 12:09:14 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:378 | Beginning training for run 3 on chunk 0
+2026-06-02 12:10:03 | top3_augB_targeted_hard_20260602_093521 | worker-0-shm | DEBUG | shm_manager.py:445 | Checkpoint update:870 in-place, 0 new
+2026-06-02 12:10:06 | top3_augB_targeted_hard_20260602_093521 | worker-0-shm | DEBUG | shm_manager.py:348 | Saved full_model for run 3
+2026-06-02 12:10:06 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:473 | Saved checkpoint to shared memory for run 3 on chunk 0
+2026-06-02 12:10:07 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:714 | Completed task: run 3, chunk 0 on workers (0,)
+2026-06-02 12:10:07 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:717 | Run 3 completed steps - 136/260
+2026-06-02 12:10:07 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:773 | Run 3 has completed epoch (1/1 chunks)
+2026-06-02 12:10:07 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:886 | Scheduled run 3 on workers (0,) for chunk 0
+2026-06-02 12:10:08 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:667 | Received task WorkerTask.TRAIN_VAL for run 3
+2026-06-02 12:10:08 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:205 | Received run_fit on worker for run 3 with chunk 0
+2026-06-02 12:10:13 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:378 | Beginning training for run 3 on chunk 0
+2026-06-02 12:10:33 | top3_augB_targeted_hard_20260602_093521 | worker-0-shm | DEBUG | shm_manager.py:445 | Checkpoint update:870 in-place, 0 new
+2026-06-02 12:10:35 | top3_augB_targeted_hard_20260602_093521 | worker-0-shm | DEBUG | shm_manager.py:348 | Saved full_model for run 3
+2026-06-02 12:10:35 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:473 | Saved checkpoint to shared memory for run 3 on chunk 0
+2026-06-02 12:10:37 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:714 | Completed task: run 3, chunk 0 on workers (0,)
+2026-06-02 12:10:37 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:717 | Run 3 completed steps - 153/260
+2026-06-02 12:10:37 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:773 | Run 3 has completed epoch (1/1 chunks)
+2026-06-02 12:10:37 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:886 | Scheduled run 3 on workers (0,) for chunk 0
+2026-06-02 12:10:38 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:667 | Received task WorkerTask.TRAIN_VAL for run 3
+2026-06-02 12:10:38 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:205 | Received run_fit on worker for run 3 with chunk 0
+2026-06-02 12:10:43 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:378 | Beginning training for run 3 on chunk 0
+2026-06-02 12:11:32 | top3_augB_targeted_hard_20260602_093521 | worker-0-shm | DEBUG | shm_manager.py:445 | Checkpoint update:870 in-place, 0 new
+2026-06-02 12:11:35 | top3_augB_targeted_hard_20260602_093521 | worker-0-shm | DEBUG | shm_manager.py:348 | Saved full_model for run 3
+2026-06-02 12:11:35 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:473 | Saved checkpoint to shared memory for run 3 on chunk 0
+2026-06-02 12:11:37 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:714 | Completed task: run 3, chunk 0 on workers (0,)
+2026-06-02 12:11:37 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:717 | Run 3 completed steps - 170/260
+2026-06-02 12:11:37 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:773 | Run 3 has completed epoch (1/1 chunks)
+2026-06-02 12:11:37 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:886 | Scheduled run 3 on workers (0,) for chunk 0
+2026-06-02 12:11:37 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:667 | Received task WorkerTask.TRAIN_VAL for run 3
+2026-06-02 12:11:37 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:205 | Received run_fit on worker for run 3 with chunk 0
+2026-06-02 12:11:43 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:378 | Beginning training for run 3 on chunk 0
+2026-06-02 12:12:02 | top3_augB_targeted_hard_20260602_093521 | worker-0-shm | DEBUG | shm_manager.py:445 | Checkpoint update:870 in-place, 0 new
+2026-06-02 12:12:05 | top3_augB_targeted_hard_20260602_093521 | worker-0-shm | DEBUG | shm_manager.py:348 | Saved full_model for run 3
+2026-06-02 12:12:05 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:473 | Saved checkpoint to shared memory for run 3 on chunk 0
+2026-06-02 12:12:06 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:714 | Completed task: run 3, chunk 0 on workers (0,)
+2026-06-02 12:12:06 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:717 | Run 3 completed steps - 187/260
+2026-06-02 12:12:06 | top3_augB_targeted_hard_20260602_093521 | controller | INFO | controller.py:773 | Run 3 has completed epoch (1/1 chunks)
+2026-06-02 12:12:06 | top3_augB_targeted_hard_20260602_093521 | controller | DEBUG | controller.py:886 | Scheduled run 3 on workers (0,) for chunk 0
+2026-06-02 12:12:07 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:667 | Received task WorkerTask.TRAIN_VAL for run 3
+2026-06-02 12:12:07 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:205 | Received run_fit on worker for run 3 with chunk 0
+2026-06-02 12:12:13 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:378 | Beginning training for run 3 on chunk 0
+2026-06-02 12:13:02 | top3_augB_targeted_hard_20260602_093521 | worker-0-shm | DEBUG | shm_manager.py:445 | Checkpoint update:870 in-place, 0 new
+2026-06-02 12:13:05 | top3_augB_targeted_hard_20260602_093521 | worker-0-shm | DEBUG | shm_manager.py:348 | Saved full_model for run 3
+2026-06-02 12:13:05 | top3_augB_targeted_hard_20260602_093521 | worker_0 | DEBUG | worker.py:473 | Saved checkpoint to shared memory for run 3 on chunk 0

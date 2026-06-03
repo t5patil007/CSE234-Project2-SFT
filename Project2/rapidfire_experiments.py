@@ -232,9 +232,11 @@ def build_rf_model_config(entry):
     if requested_save_strategy == "chunk":
         # RapidFire's worker-level disk persistence checks for the literal
         # "chunk" strategy in config_leaf when shared memory is enabled.
-        # Trainer-side HF config will still be forced to save_strategy="no"
+        # Use normal attribute assignment so RapidFire's RF wrapper updates
+        # _user_params; mutating __dict__ bypasses config expansion state.
+        # Trainer-side HF config is still forced to save_strategy="no"
         # internally by RapidFire, so this marker is safe.
-        train.__dict__["save_strategy"] = "chunk"
+        train.save_strategy = "chunk"
     return RFModelConfig(
         model_name=entry["model_name"],
         peft_config=peft_config,
