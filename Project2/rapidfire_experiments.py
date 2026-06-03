@@ -167,8 +167,13 @@ def create_model(model_config):
     from transformers import AutoModelForCausalLM, AutoTokenizer
 
     model_name = model_config["model_name"]
-    model_kwargs = model_config["model_kwargs"]
+    model_kwargs = dict(model_config["model_kwargs"])
+    # Some newer architectures (e.g. Qwen3.5) reject use_cache in __init__;
+    # apply via config after load instead.
+    use_cache = model_kwargs.pop("use_cache", None)
     model = AutoModelForCausalLM.from_pretrained(model_name, **model_kwargs)
+    if use_cache is not None and hasattr(model, "config"):
+        model.config.use_cache = use_cache
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     if tokenizer.pad_token is None and tokenizer.eos_token is not None:
         tokenizer.pad_token = tokenizer.eos_token

@@ -1,0 +1,1438 @@
+[
+  {
+    "question_id": 302,
+    "db_id": "NYSED_SRC2022",
+    "question": "Provide schema links for the following user request: What is the 2022 federal expenditure per student at the public high school with the highest english language learner count in the All Students sub group in their english language program? Include the school name, language learner count, and federal expenditure per student in the result.",
+    "gold_sql": "select top 1 el.ENTITY_NAME, ELL_COUNT, PER_FED_STATE_LOCAL_EXP from [ACC_HS_ELP] el join [Expenditures_per_Pupil] ex  \ton el.ENTITY_CD = ex.ENTITY_CD  \tand el.year = ex.year where SUBGROUP_NAME = 'All Students' \tand ELL_COUNT <> 's' \tand ex.YEAR = 2022 \tand el.entity_cd in ( \t\tselect entity_cd \t\tfrom [Institution_Grouping] \t\twhere GROUP_NAME = 'public school district' \t) order by cast(ELL_COUNT as float) desc",
+    "schema_links": {
+      "ACC_HS_ELP": [
+        "ELL_COUNT",
+        "ENTITY_CD",
+        "ENTITY_NAME",
+        "SUBGROUP_NAME",
+        "YEAR"
+      ],
+      "Expenditures_per_Pupil": [
+        "ENTITY_CD",
+        "PER_FED_STATE_LOCAL_EXP",
+        "YEAR"
+      ],
+      "Institution_Grouping": [
+        "ENTITY_CD",
+        "GROUP_NAME"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:25.995882+00:00"
+    }
+  },
+  {
+    "question_id": 303,
+    "db_id": "NTSB",
+    "question": "Provide schema links for the following user request: Show a count of occupant ejections by sex",
+    "gold_sql": "SELECT SEX, COUNT(*) FROM OCC JOIN EJECT ON OCC.CASEID = EJECT.CASEID AND OCC.VEHNO = EJECT.VEHNO AND OCC.OCCNO = EJECT.VEHNO GROUP BY SEX",
+    "schema_links": {
+      "EJECT": [
+        "CASEID",
+        "VEHNO"
+      ],
+      "OCC": [
+        "CASEID",
+        "OCCNO",
+        "SEX",
+        "VEHNO"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.008860+00:00"
+    }
+  },
+  {
+    "question_id": 304,
+    "db_id": "NorthernPlainsFireManagement",
+    "question": "Map this request to schema entities (table -> columns): For each tree condition, show the number of trees for trees with a tag number (not tag ID) greater than 220.",
+    "gold_sql": "select TreeCond, count(*) treeCount from tbl_Tree_Tags tt join tbl_Overstory o on o.TreeTag = tt.Tree_Tag_ID where Tag > 220 group by TreeCond",
+    "schema_links": {
+      "tbl_Overstory": [
+        "TreeCond",
+        "TreeTag"
+      ],
+      "tbl_Tree_Tags": [
+        "Tag",
+        "Tree_Tag_ID"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.016607+00:00"
+    }
+  },
+  {
+    "question_id": 305,
+    "db_id": "NorthernPlainsFireManagement",
+    "question": "Provide schema links for the following user request: Show the ecology notes, coordinate units, coordinate system, and datum for the location on plot A14_1",
+    "gold_sql": "select Eco_notes, coord_units, Coord_system, datum from tbl_locations where Plot_ID = 'A14_1'",
+    "schema_links": {
+      "tbl_Locations": [
+        "Coord_System",
+        "Coord_Units",
+        "Datum",
+        "Eco_Notes",
+        "Plot_ID"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.024598+00:00"
+    }
+  },
+  {
+    "question_id": 306,
+    "db_id": "ASIS_20161108_HerpInv_Database",
+    "question": "Provide schema links for the following user request: How many minnow traps are there at each location?",
+    "gold_sql": "select locationID, count(distinct [trap_#]) trapCount from tblFieldDataMinnowTrapSurveys group by locationID",
+    "schema_links": {
+      "tblFieldDataMinnowTrapSurveys": [
+        "LocationID",
+        "Trap_#"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.029865+00:00"
+    }
+  },
+  {
+    "question_id": 307,
+    "db_id": "CratersWildlifeObservations",
+    "question": "Identify the SQL-referenced schema pieces for: Display the observation type and a count of invertebrate records for each observation type",
+    "gold_sql": "select OBS_TYPE, count(*) obsCount from INVERTEBRATES group by OBS_TYPE",
+    "schema_links": {
+      "INVERTEBRATES": [
+        "OBS_TYPE"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.037277+00:00"
+    }
+  },
+  {
+    "question_id": 308,
+    "db_id": "NTSB",
+    "question": "Identify the SQL-referenced schema pieces for: How many vehicles had damage to the windshield glazing?",
+    "gold_sql": "SELECT COUNT(*) AS WINDSHIELD_DAMAGE_COUNT FROM GLAZING WHERE GLAZLOC = 1",
+    "schema_links": {
+      "GLAZING": [
+        "GLAZLOC"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.049504+00:00"
+    }
+  },
+  {
+    "question_id": 309,
+    "db_id": "SBODemoUS-Business Partners",
+    "question": "Identify the SQL-referenced schema pieces for: Show the group name and count of business partners in each card group",
+    "gold_sql": "select GroupName, count(*) partnerCount from OCRG join OCRD on OCRG.GroupCode = OCRD.GroupCode group by GroupName",
+    "schema_links": {
+      "OCRD": [
+        "GroupCode"
+      ],
+      "OCRG": [
+        "GroupCode",
+        "GroupName"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.052994+00:00"
+    }
+  },
+  {
+    "question_id": 310,
+    "db_id": "PacificIslandLandbirds",
+    "question": "Provide schema links for the following user request: How many events does each station have? Show them in the descending order of event counts. Include the station name and the event count in the output.",
+    "gold_sql": "select station, count(*) as event_count from tbl_stations ts join tbl_events te on ts.station_id = te.station_id group by ts.station order by event_count desc",
+    "schema_links": {
+      "tbl_Events": [
+        "Station_ID"
+      ],
+      "tbl_Stations": [
+        "Station",
+        "Station_ID"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.061221+00:00"
+    }
+  },
+  {
+    "question_id": 311,
+    "db_id": "SBODemoUS-General",
+    "question": "Identify the SQL-referenced schema pieces for: How many queries does the dashboard entry with code DAB002 have?",
+    "gold_sql": "select count(*) queryCount from ODAB join DAB1 on ODAB.AbsEntry = DAB1.DsbEntry where DashbdCode = 'DAB002'",
+    "schema_links": {
+      "DAB1": [
+        "DsbEntry"
+      ],
+      "ODAB": [
+        "AbsEntry",
+        "DashbdCode"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.063783+00:00"
+    }
+  },
+  {
+    "question_id": 312,
+    "db_id": "NTSB",
+    "question": "Map this request to schema entities (table -> columns): Show the number of crashes in each intrusion magnitude category",
+    "gold_sql": "SELECT INTMAG, (COUNT(DISTINCT CASEID)) CRASHCOUNT FROM INTRUSION GROUP BY INTMAG",
+    "schema_links": {
+      "INTRUSION": [
+        "CASEID",
+        "INTMAG"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.077720+00:00"
+    }
+  },
+  {
+    "question_id": 313,
+    "db_id": "CratersWildlifeObservations",
+    "question": "Provide schema links for the following user request: Which observers have either only observed Invertebrates, or only observed Vertebrates, but not both?",
+    "gold_sql": "select distinct observer from INVERTEBRATES except select distinct observer from VERTEBRATES",
+    "schema_links": {
+      "INVERTEBRATES": [
+        "Observer"
+      ],
+      "VERTEBRATES": [
+        "Observer"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.086112+00:00"
+    }
+  },
+  {
+    "question_id": 314,
+    "db_id": "ASIS_20161108_HerpInv_Database",
+    "question": "Provide schema links for the following user request: Show the average air temperature on cloudy days that correspond to cover board  data where the board material is wood at the site with id 30CB2",
+    "gold_sql": "select avg(AirTemp) as avgTemp  from tblFieldDataCoverBoard cb join tblEventDataHerps ev on cb.EventID = ev.EventID join tblLocations l on cb.LocationID = l.LocationID where Type = 'Metal' and SiteId = '30CB2' and weather = 'cloudy'",
+    "schema_links": {
+      "tblEventDataHerps": [
+        "AirTemp",
+        "EventID",
+        "Weather"
+      ],
+      "tblFieldDataCoverBoard": [
+        "EventID",
+        "LocationID",
+        "Type"
+      ],
+      "tblLocations": [
+        "LocationID",
+        "SiteID"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.096049+00:00"
+    }
+  },
+  {
+    "question_id": 315,
+    "db_id": "PacificIslandLandbirds",
+    "question": "Identify the SQL-referenced schema pieces for: How many islands are there?",
+    "gold_sql": "select count(distinct Island) from tbl_locations",
+    "schema_links": {
+      "tbl_Locations": [
+        "Island"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.099016+00:00"
+    }
+  },
+  {
+    "question_id": 316,
+    "db_id": "ATBI",
+    "question": "Map this request to schema entities (table -> columns): For each genus and species, get the total number of witness trees observed.",
+    "gold_sql": "select genus, species, count(*) treeCount from tlu_PlantSpecies s join tbl_WitnessTrees w on s.SpeciesCode = w.Witness_SpCode group by genus, species",
+    "schema_links": {
+      "tbl_WitnessTrees": [
+        "Witness_SpCode"
+      ],
+      "tlu_PlantSpecies": [
+        "SpeciesCode",
+        "genus",
+        "species"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.105902+00:00"
+    }
+  },
+  {
+    "question_id": 317,
+    "db_id": "PacificIslandLandbirds",
+    "question": "Identify the SQL-referenced schema pieces for: what are all of the different sources of species information?",
+    "gold_sql": "select distinct source from tlu_species",
+    "schema_links": {
+      "tlu_Species": [
+        "Source"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.111190+00:00"
+    }
+  },
+  {
+    "question_id": 318,
+    "db_id": "ASIS_20161108_HerpInv_Database",
+    "question": "Identify the SQL-referenced schema pieces for: show the total number of minnows counted at each trap by location. Each location has multiple traps.",
+    "gold_sql": "select locationID, [Trap_#], sum(count) minnowCountSum from tblFieldDataMinnowTrapSurveys group by locationID, [Trap_#]",
+    "schema_links": {
+      "tblFieldDataMinnowTrapSurveys": [
+        "Count",
+        "LocationID",
+        "Trap_#"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.119008+00:00"
+    }
+  },
+  {
+    "question_id": 319,
+    "db_id": "SBODemoUS-Banking",
+    "question": "Provide schema links for the following user request: What is the Withholding tax posted, account number, and functional currency sum for the incoming checks with the country code 'CA'",
+    "gold_sql": "select WTOnhldPst, AcctNum, CheckSumFC from ORCT join RCT1 on ORCT.DocNum = RCT1.DocNum where CountryCod = 'CA'",
+    "schema_links": {
+      "ORCT": [
+        "CheckSumFC",
+        "DocNum",
+        "WTOnhldPst"
+      ],
+      "RCT1": [
+        "AcctNum",
+        "CountryCod",
+        "DocNum"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.123814+00:00"
+    }
+  },
+  {
+    "question_id": 320,
+    "db_id": "NorthernPlainsFireManagement",
+    "question": "Provide schema links for the following user request: How many events had both overstory and deadwood entries?",
+    "gold_sql": "select count(distinct Event_ID) eventCount from tbl_Deadwood d where d.Event_ID in (select event_id from tbl_Overstory)",
+    "schema_links": {
+      "tbl_Deadwood": [
+        "Event_ID"
+      ],
+      "tbl_Overstory": [
+        "Event_ID"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.130092+00:00"
+    }
+  },
+  {
+    "question_id": 321,
+    "db_id": "ASIS_20161108_HerpInv_Database",
+    "question": "Identify the SQL-referenced schema pieces for: show how many minnows of each stage were counted at the location ASIS_HERPS_20H",
+    "gold_sql": "select stage, sum(count) minnowCountSum from tblFieldDataMinnowTrapSurveys where locationID = 'ASIS_HERPS_20H' group by stage",
+    "schema_links": {
+      "tblFieldDataMinnowTrapSurveys": [
+        "Count",
+        "LocationID",
+        "Stage"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.137669+00:00"
+    }
+  },
+  {
+    "question_id": 322,
+    "db_id": "PacificIslandLandbirds",
+    "question": "Provide schema links for the following user request: What is the most common understory composition and canopy composition combination of events entered by Caitlin Jensen?",
+    "gold_sql": "select top 1 canopy_comp, understory_comp from tbl_habitat h join tbl_events e on h.event_id = e.event_id where entered_by = 'caitlin jensen' group by canopy_comp, understory_comp order by count(*) desc",
+    "schema_links": {
+      "tbl_Events": [
+        "Entered_by",
+        "Event_ID"
+      ],
+      "tbl_Habitat": [
+        "Canopy_Comp",
+        "Event_ID",
+        "Understory_Comp"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.145888+00:00"
+    }
+  },
+  {
+    "question_id": 323,
+    "db_id": "NTSB",
+    "question": "Provide schema links for the following user request: List the Front and rear axle weight ratings for vehicles that have a gross vehicle weight rating between 4000 and 9000",
+    "gold_sql": "SELECT GAWRFRONT, GAWRREAR FROM TIREPLAC WHERE GVWR BETWEEN 4000 AND 9000",
+    "schema_links": {
+      "TIREPLAC": [
+        "GAWRFRONT",
+        "GAWRREAR",
+        "GVWR"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.166855+00:00"
+    }
+  },
+  {
+    "question_id": 324,
+    "db_id": "PacificIslandLandbirds",
+    "question": "Provide schema links for the following user request: What is the station name of the station currently located at UTM coordinates X 272454 Y 2141631",
+    "gold_sql": "select Station  from tbl_stations  join tbl_Stations_UTMs on tbl_stations.Station_ID = tbl_stations_utms.Station_ID where X_final = 272454 and Y_final = 2141631",
+    "schema_links": {
+      "tbl_Stations": [
+        "Station",
+        "Station_ID"
+      ],
+      "tbl_Stations_UTMs": [
+        "Station_ID",
+        "X_final",
+        "Y_final"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.174276+00:00"
+    }
+  },
+  {
+    "question_id": 325,
+    "db_id": "SBODemoUS-Banking",
+    "question": "Identify the SQL-referenced schema pieces for: For incoming payments processed with credit vouchers, show the average of the sums of the first partial payments.",
+    "gold_sql": "select avg(FirstSum) firstPmtAvg from ORCT join RCT3 on ORCT.DocNum = RCT3.DocNum",
+    "schema_links": {
+      "ORCT": [
+        "DocNum"
+      ],
+      "RCT3": [
+        "DocNum",
+        "FirstSum"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.177079+00:00"
+    }
+  },
+  {
+    "question_id": 326,
+    "db_id": "SBODemoUS-Human Resources",
+    "question": "Provide schema links for the following user request: Show the municipality key, tax class, and income tax liability for all of the employees of type accountant.",
+    "gold_sql": "select MunKey, TaxClass, InTaxLiabi from OHEM join OHTY on OHEM.type = OHTY.typeID where OHTY.name = 'Accountant'",
+    "schema_links": {
+      "OHEM": [
+        "InTaxLiabi",
+        "MunKey",
+        "TaxClass",
+        "type"
+      ],
+      "OHTY": [
+        "name",
+        "typeID"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.181712+00:00"
+    }
+  },
+  {
+    "question_id": 327,
+    "db_id": "PacificIslandLandbirds",
+    "question": "Identify the SQL-referenced schema pieces for: What are the names of the sites on each island?",
+    "gold_sql": "select distinct Island, Site_name from tbl_locations join tbl_sites on tbl_locations.site_id = tbl_sites.site_id",
+    "schema_links": {
+      "tbl_Locations": [
+        "Island",
+        "Site_ID"
+      ],
+      "tbl_Sites": [
+        "Site_ID",
+        "Site_Name"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.187161+00:00"
+    }
+  },
+  {
+    "question_id": 328,
+    "db_id": "ASIS_20161108_HerpInv_Database",
+    "question": "Provide schema links for the following user request: how many distinct species were documented on a reptile survey green card?",
+    "gold_sql": "select count(distinct [species_code]) speciesCount from tblFieldDataGreenCardObservations",
+    "schema_links": {
+      "tblFieldDataGreenCardObservations": [
+        "Species_Code"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.195554+00:00"
+    }
+  },
+  {
+    "question_id": 329,
+    "db_id": "NorthernPlainsFireManagement",
+    "question": "Map this request to schema entities (table -> columns): What are the directions to the Maddron Bald Trail?",
+    "gold_sql": "select directions from tbl_Locations where trail = 'maddron bald trail'",
+    "schema_links": {
+      "tbl_Locations": [
+        "Directions",
+        "Trail"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.201459+00:00"
+    }
+  },
+  {
+    "question_id": 330,
+    "db_id": "PacificIslandLandbirds",
+    "question": "Provide schema links for the following user request: Show a count of observations by species habitat",
+    "gold_sql": "select habitat, count(*) obsCount from tlu_species s join tbl_observations o on o.Species_ID = s.Species_ID group by habitat",
+    "schema_links": {
+      "tbl_Observations": [
+        "Species_ID"
+      ],
+      "tlu_Species": [
+        "Habitat",
+        "Species_ID"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.207521+00:00"
+    }
+  },
+  {
+    "question_id": 331,
+    "db_id": "KlamathInvasiveSpecies",
+    "question": "Identify the SQL-referenced schema pieces for: What is the description of the Logging code in the Land Use enumeration group?",
+    "gold_sql": "select Enum_Description from tlu_Enumerations where Enum_Group = 'Land Use' \tand Enum_Code = 'Logging'",
+    "schema_links": {
+      "tlu_Enumerations": [
+        "Enum_Code",
+        "Enum_Description",
+        "Enum_Group"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.214291+00:00"
+    }
+  },
+  {
+    "question_id": 332,
+    "db_id": "ATBI",
+    "question": "Provide schema links for the following user request: For the event that observed the most decayed logs, how many of each stage of decay were observed? Show the description of each decay stage in the result.",
+    "gold_sql": "select DecayStage_Descr, count(*) as numLogs  from tbl_Deadwood join tlu_DecayStage on tbl_Deadwood.Decay = tlu_DecayStage.DecayStage_ID where Event_ID in ( \tselect TOP 1 Event_ID from tbl_Deadwood group by Event_ID order by count(*) desc ) group by DecayStage_Descr",
+    "schema_links": {
+      "tbl_Deadwood": [
+        "Decay",
+        "Event_ID"
+      ],
+      "tlu_DecayStage": [
+        "DecayStage_Descr",
+        "DecayStage_ID"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.223901+00:00"
+    }
+  },
+  {
+    "question_id": 333,
+    "db_id": "NTSB",
+    "question": "Identify the SQL-referenced schema pieces for: Show the total occupant count and the mortality count by belt use category. A mortality occured (was fatal) indicated by lookup code 1.",
+    "gold_sql": "SELECT M.BELTUSE, TOTALCOUNT, MORTALCOUNT FROM ( \tSELECT BELTUSE, COUNT(*) MORTALCOUNT \tFROM OCC \tWHERE MORTALITY = 1 \tGROUP BY BELTUSE ) M JOIN ( \tSELECT BELTUSE, COUNT(*) TOTALCOUNT \tFROM OCC \tGROUP BY BELTUSE ) T ON M.BELTUSE = T.BELTUSE",
+    "schema_links": {
+      "OCC": [
+        "BELTUSE",
+        "MORTALITY"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.247659+00:00"
+    }
+  },
+  {
+    "question_id": 334,
+    "db_id": "SBODemoUS-Business Partners",
+    "question": "Identify the SQL-referenced schema pieces for: What are the names, mobile phone numbers, and email addresses of sales employees in the high commission group?",
+    "gold_sql": "select SlpName, Mobil, Email from OSLP join OCOG on OSLP.GroupCode = OCOG.GroupCode where GroupName = 'High Commission'",
+    "schema_links": {
+      "OCOG": [
+        "GroupCode",
+        "GroupName"
+      ],
+      "OSLP": [
+        "Email",
+        "GroupCode",
+        "Mobil",
+        "SlpName"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.249918+00:00"
+    }
+  },
+  {
+    "question_id": 335,
+    "db_id": "KlamathInvasiveSpecies",
+    "question": "Provide schema links for the following user request: How many different codes are there for each enumeration group?",
+    "gold_sql": "select Enum_Group, count(*) codeCount from tlu_Enumerations group by Enum_Group",
+    "schema_links": {
+      "tlu_Enumerations": [
+        "Enum_Group"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.256323+00:00"
+    }
+  },
+  {
+    "question_id": 336,
+    "db_id": "NTSB",
+    "question": "Identify the SQL-referenced schema pieces for: For each case where measurements were performed, show the case ID, vehicle number, and all of the different crush measurements and the maximum. Codes 888 and 999 indicate that measurements are not available.",
+    "gold_sql": "SELECT CASEID, VEHNO, CMAX, C1, C2, C3, C4, C5, C6 FROM CDC WHERE CMAX NOT IN (888, 999)",
+    "schema_links": {
+      "CDC": [
+        "C1",
+        "C2",
+        "C3",
+        "C4",
+        "C5",
+        "C6",
+        "CASEID",
+        "CMAX",
+        "VEHNO"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.289913+00:00"
+    }
+  },
+  {
+    "question_id": 337,
+    "db_id": "ASIS_20161108_HerpInv_Database",
+    "question": "Provide schema links for the following user request: How many turtles were measured at each location where turtles were measured?",
+    "gold_sql": "select locationID, count(*) turtleCount from tblFieldDataTurtleMeasurements group by locationID",
+    "schema_links": {
+      "tblFieldDataTurtleMeasurements": [
+        "LocationID"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.298188+00:00"
+    }
+  },
+  {
+    "question_id": 338,
+    "db_id": "NTSB",
+    "question": "Map this request to schema entities (table -> columns): Show a count of injuries by body region",
+    "gold_sql": "SELECT REGION, COUNT(*) INJCOUNT FROM INJURY GROUP BY REGION",
+    "schema_links": {
+      "INJURY": [
+        "REGION"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.310454+00:00"
+    }
+  },
+  {
+    "question_id": 339,
+    "db_id": "CratersWildlifeObservations",
+    "question": "Identify the SQL-referenced schema pieces for: Get a count of big game roadkill for each location. The value for big game is 'yes'.",
+    "gold_sql": "select Location, count(*) gameCount from roadkill where Big_Game like 'yes' group by Location",
+    "schema_links": {
+      "Roadkill": [
+        "Big_Game",
+        "Location"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.318668+00:00"
+    }
+  },
+  {
+    "question_id": 340,
+    "db_id": "NTSB",
+    "question": "Identify the SQL-referenced schema pieces for: How many toyota tacomas are there in the data?",
+    "gold_sql": "SELECT COUNT(*) TACOMACOUNT FROM VPICDECODE WHERE MAKE = 'TOYOTA' AND MODEL = 'TACOMA'",
+    "schema_links": {
+      "VPICDECODE": [
+        "Make",
+        "Model"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.331768+00:00"
+    }
+  },
+  {
+    "question_id": 341,
+    "db_id": "SBODemoUS-Service",
+    "question": "Identify the SQL-referenced schema pieces for: What are the internal serial numbers of the service contract with the customer named microhips and the iten code A00006?",
+    "gold_sql": "select internalSN from OINS where custmrName = 'Microchips' and itemCode = 'A00006'",
+    "schema_links": {
+      "OINS": [
+        "custmrName",
+        "internalSN",
+        "itemCode"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.334976+00:00"
+    }
+  },
+  {
+    "question_id": 342,
+    "db_id": "NTSB",
+    "question": "Identify the SQL-referenced schema pieces for: How many accidents with occupied child seats were related to distracted driving?",
+    "gold_sql": "SELECT COUNT(DISTINCT D.CASEID) ACCIDENTCOUNT FROM DISTRACT D JOIN ( \tSELECT DISTINCT CASEID FROM CHILDSEAT WHERE OCCNO IS NOT NULL ) S ON D.CASEID = S.CASEID",
+    "schema_links": {
+      "CHILDSEAT": [
+        "CASEID",
+        "OCCNO"
+      ],
+      "DISTRACT": [
+        "CASEID"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.354065+00:00"
+    }
+  },
+  {
+    "question_id": 343,
+    "db_id": "NorthernPlainsFireManagement",
+    "question": "Map this request to schema entities (table -> columns): For each decay stage, show the description and the count of dead wood observations",
+    "gold_sql": "select DecayStage_Descr, count(*) DeadWoodCount from tlu_DecayStage dc join tbl_Deadwood dw on dc.DecayStage_ID = dw.Decay group by DecayStage_Descr",
+    "schema_links": {
+      "tbl_Deadwood": [
+        "Decay"
+      ],
+      "tlu_DecayStage": [
+        "DecayStage_Descr",
+        "DecayStage_ID"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.361559+00:00"
+    }
+  },
+  {
+    "question_id": 344,
+    "db_id": "NTSB",
+    "question": "Map this request to schema entities (table -> columns): List the case IDs, make, model, recommended and actual tire sizes for vehicles that had a left front tire size that did not match the manufacturers first recommended front tire size.",
+    "gold_sql": "SELECT T.CASEID, MAKE, MODEL, T.VEHNO, TIRESIZE, RECFRONT1 FROM TIRE T JOIN TIREPLAC TP ON T.CASEID = TP.CASEID AND T.VEHNO = TP.VEHNO JOIN VPICDECODE V ON T.CASEID = V.CASEID AND T.VEHNO = V.VEHNO WHERE TIRELOC = 'LF' AND TIRESIZE <> RECFRONT1",
+    "schema_links": {
+      "TIRE": [
+        "CASEID",
+        "TIRELOC",
+        "TIRESIZE",
+        "VEHNO"
+      ],
+      "TIREPLAC": [
+        "CASEID",
+        "RECFRONT1",
+        "VEHNO"
+      ],
+      "VPICDECODE": [
+        "CASEID",
+        "Make",
+        "Model",
+        "VEHNO"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.393345+00:00"
+    }
+  },
+  {
+    "question_id": 345,
+    "db_id": "NorthernPlainsFireManagement",
+    "question": "Provide schema links for the following user request: For each canopy position name, show how many overstory were classified for each position for the species with the common name 'Red Maple'",
+    "gold_sql": "select CanPos_Name, count(*) OverstoryCount from tlu_Can_Pos c join tbl_Overstory o on c.CanPos_Num = o.CanPos join tlu_PlantSpecies s on s.SpeciesCode = o.SpCode where CommonName = 'Red maple' group by CanPos_Name",
+    "schema_links": {
+      "tbl_Overstory": [
+        "CanPos",
+        "SpCode"
+      ],
+      "tlu_Can_Pos": [
+        "CanPos_Name",
+        "CanPos_Num"
+      ],
+      "tlu_PlantSpecies": [
+        "CommonName",
+        "SpeciesCode"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.404768+00:00"
+    }
+  },
+  {
+    "question_id": 346,
+    "db_id": "NorthernPlainsFireManagement",
+    "question": "Identify the SQL-referenced schema pieces for: What is the Genus, species, and common name of the species with the highest seedling density?",
+    "gold_sql": "select top 1 Genus, species, CommonName from tbl_Seedlings s join tlu_PlantSpecies sp on s.SpCode = sp.SpeciesCode order by density desc",
+    "schema_links": {
+      "tbl_Seedlings": [
+        "Density",
+        "SpCode"
+      ],
+      "tlu_PlantSpecies": [
+        "CommonName",
+        "SpeciesCode",
+        "genus",
+        "species"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.414933+00:00"
+    }
+  },
+  {
+    "question_id": 347,
+    "db_id": "NTSB",
+    "question": "Identify the SQL-referenced schema pieces for: Display a count of vehicle inspections by inspection type",
+    "gold_sql": "SELECT INSPTYPE, COUNT(*) AS VEHCOUNT FROM GV GROUP BY INSPTYPE",
+    "schema_links": {
+      "GV": [
+        "INSPTYPE"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.429740+00:00"
+    }
+  },
+  {
+    "question_id": 348,
+    "db_id": "PacificIslandLandbirds",
+    "question": "Map this request to schema entities (table -> columns): How many stations does each island have?",
+    "gold_sql": "select Island, count(*) as station_count from tbl_locations loc join tbl_transect trans on loc.location_id = trans.location_id join tbl_stations sta on trans.transect_id = sta.Transect_ID group by Island",
+    "schema_links": {
+      "tbl_Locations": [
+        "Island",
+        "Location_ID"
+      ],
+      "tbl_Stations": [
+        "Transect_ID"
+      ],
+      "tbl_Transect": [
+        "Location_ID",
+        "Transect_ID"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.435484+00:00"
+    }
+  },
+  {
+    "question_id": 349,
+    "db_id": "NorthernPlainsFireManagement",
+    "question": "Provide schema links for the following user request: How many different slope shapes are there in the lookup table?",
+    "gold_sql": "select count(*) from tlu_Slope_Shape",
+    "schema_links": {
+      "tlu_Slope_Shape": []
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.443736+00:00"
+    }
+  },
+  {
+    "question_id": 350,
+    "db_id": "NTSB",
+    "question": "Map this request to schema entities (table -> columns): How many injuries are there for each body region?",
+    "gold_sql": "SELECT BRI, COUNT(*) AS INJURY_COUNT  FROM ICS GROUP BY BRI",
+    "schema_links": {
+      "ICS": [
+        "BRI"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.457055+00:00"
+    }
+  },
+  {
+    "question_id": 351,
+    "db_id": "PacificIslandLandbirds",
+    "question": "Map this request to schema entities (table -> columns): Show the first name, last name, and number of logged events for members of the national park service.",
+    "gold_sql": "select last_name, first_name, count(*) num_events from tlu_contacts tlc join xref_event_contacts xrec on tlc.Contact_ID = xrec.Contact_ID where organization = 'National Park Service' group by last_name, first_name, organization order by last_name desc",
+    "schema_links": {
+      "tlu_Contacts": [
+        "Contact_ID",
+        "First_Name",
+        "Last_Name",
+        "Organization"
+      ],
+      "xref_Event_Contacts": [
+        "Contact_ID"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.466834+00:00"
+    }
+  },
+  {
+    "question_id": 352,
+    "db_id": "SBODemoUS-Service",
+    "question": "Provide schema links for the following user request: What is the renewal status of the contracts with the customer named 'Maxi-Teq'? Include the contract ID and the status in the result.",
+    "gold_sql": "select ContractID, Renewal from OCTR where CstmrName = 'Maxi-Teq'",
+    "schema_links": {
+      "OCTR": [
+        "ContractID",
+        "CstmrName",
+        "Renewal"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.470251+00:00"
+    }
+  },
+  {
+    "question_id": 353,
+    "db_id": "SBODemoUS-Finance",
+    "question": "Identify the SQL-referenced schema pieces for: Show the names of the financial report categories that have father number 10",
+    "gold_sql": "select name from OFRC where FatherNum = 10",
+    "schema_links": {
+      "OFRC": [
+        "FatherNum",
+        "Name"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.474334+00:00"
+    }
+  },
+  {
+    "question_id": 354,
+    "db_id": "NTSB",
+    "question": "Identify the SQL-referenced schema pieces for: Show the highest speed recorded by the event data recorder for each case for cases where at least one vehicle exceeded 160 (but no more than 300). Include the case id, vehicle make and model. Sort from fastest to slowest.",
+    "gold_sql": "SELECT PR.CASEID, MAKE, MODEL, MAX(PVALUE) MAXSPEED  FROM EDRPRECRASH PR JOIN VPICDECODE V ON PR.CASEID = V.CASEID AND V.VEHNO = PR.VEHNO WHERE PCODE = 1010 AND PVALUE > 160 AND PVALUE < 300 GROUP BY PR.CASEID, PR.VEHNO, MAKE, MODEL ORDER BY MAX(PVALUE) DESC",
+    "schema_links": {
+      "EDRPRECRASH": [
+        "CASEID",
+        "PCODE",
+        "PVALUE",
+        "VEHNO"
+      ],
+      "VPICDECODE": [
+        "CASEID",
+        "Make",
+        "Model",
+        "VEHNO"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.512997+00:00"
+    }
+  },
+  {
+    "question_id": 355,
+    "db_id": "ATBI",
+    "question": "Map this request to schema entities (table -> columns): Make a list of genus, species, and common name, for overstory (trees) in Swain county. Include only one row per distinct combination.",
+    "gold_sql": "select distinct genus, species, CommonName from tlu_PlantSpecies sp join tbl_Overstory os on sp.SpeciesCode = os.SpCode join tbl_Tree_Tags tt on tt.Tree_Tag_ID = os.TreeTag join tbl_locations l on l.Location_ID = tt.Location_ID join tlu_PlaceNames pn on pn.ID = l.PlaceNameID where county = 'Swain'",
+    "schema_links": {
+      "tbl_Locations": [
+        "Location_ID",
+        "PlaceNameID"
+      ],
+      "tbl_Overstory": [
+        "SpCode",
+        "TreeTag"
+      ],
+      "tbl_Tree_Tags": [
+        "Location_ID",
+        "Tree_Tag_ID"
+      ],
+      "tlu_PlaceNames": [
+        "County",
+        "ID"
+      ],
+      "tlu_PlantSpecies": [
+        "CommonName",
+        "SpeciesCode",
+        "genus",
+        "species"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.522835+00:00"
+    }
+  },
+  {
+    "question_id": 356,
+    "db_id": "ATBI",
+    "question": "Map this request to schema entities (table -> columns): What are the x an y coordinates for the tree with tag 652?",
+    "gold_sql": "select Xcoord, Ycoord  from tbl_Tree_Tags where tag = 652",
+    "schema_links": {
+      "tbl_Tree_Tags": [
+        "Tag",
+        "Xcoord",
+        "Ycoord"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.528693+00:00"
+    }
+  },
+  {
+    "question_id": 357,
+    "db_id": "SBODemoUS-Sales Opportunities",
+    "question": "Map this request to schema entities (table -> columns): Show the sales opportunity average gross profit in local currency by year created",
+    "gold_sql": "select year(CreateDate) yearCreated, avg(SumProfL) avgLocProfit from OOPR group by year(CreateDate)",
+    "schema_links": {
+      "OOPR": [
+        "CreateDate",
+        "SumProfL"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.530274+00:00"
+    }
+  },
+  {
+    "question_id": 358,
+    "db_id": "CratersWildlifeObservations",
+    "question": "Provide schema links for the following user request: What are the common and scientific names of vertebrates observed at the coordinates Universal Transverse Mercator North = 4814897 and Universal Transverse Mercator East = 291766",
+    "gold_sql": "select Common_Name, Scientific_Name from VERTEBRATES where UTMN = 4814897 and UTME = 291766",
+    "schema_links": {
+      "VERTEBRATES": [
+        "Common_Name",
+        "Scientific_Name",
+        "UTME",
+        "UTMN"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.543662+00:00"
+    }
+  },
+  {
+    "question_id": 359,
+    "db_id": "NYSED_SRC2022",
+    "question": "Provide schema links for the following user request: Show the 2022 high school participation rates and graduation rates for the subgroup 'All Students' who attended Brooklyn Collegiate.",
+    "gold_sql": "select rate, grad_rate from [ACC_HS_Participation_Rate] p join [ACC_HS_Graduation_Rate] g  \ton p.ENTITY_CD = g.ENTITY_CD  \tand p.SUBGROUP_NAME = g.SUBGROUP_NAME  \tand p.YEAR = g.YEAR  \tand p.ENTITY_NAME = g.ENTITY_NAME \tand p.INSTITUTION_ID = g.INSTITUTION_ID where p.ENTITY_NAME = 'Brooklyn Collegiate' and p.SUBGROUP_NAME = 'All Students' and p.year = 2022",
+    "schema_links": {
+      "ACC_HS_Graduation_Rate": [
+        "ENTITY_CD",
+        "ENTITY_NAME",
+        "GRAD_RATE",
+        "INSTITUTION_ID",
+        "SUBGROUP_NAME",
+        "YEAR"
+      ],
+      "ACC_HS_Participation_Rate": [
+        "ENTITY_CD",
+        "ENTITY_NAME",
+        "INSTITUTION_ID",
+        "RATE",
+        "SUBGROUP_NAME",
+        "YEAR"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.559175+00:00"
+    }
+  },
+  {
+    "question_id": 360,
+    "db_id": "NYSED_SRC2022",
+    "question": "Map this request to schema entities (table -> columns): Show the percent not tested in 2021 on english language assessment ELA4, for each demographic subgroup at PEMBROKE INTERMEDIATE SCHOOL",
+    "gold_sql": "select SUBGROUP_NAME, pct_not_tested from [Annual_EM_ELA] where entity_name = 'PEMBROKE INTERMEDIATE SCHOOL'      and ASSESSMENT_NAME = 'ELA4'     and year = 2021",
+    "schema_links": {
+      "Annual_EM_ELA": [
+        "ASSESSMENT_NAME",
+        "ENTITY_NAME",
+        "PCT_NOT_TESTED",
+        "SUBGROUP_NAME",
+        "YEAR"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.576328+00:00"
+    }
+  },
+  {
+    "question_id": 361,
+    "db_id": "SBODemoUS-Human Resources",
+    "question": "Identify the SQL-referenced schema pieces for: What is the marital status, home street, home block, home zip code, and home state of the employee with the last name Bridi?",
+    "gold_sql": "select martstatus, homestreet, homeblock, homezip, homestate from OHEM where lastName = 'Bridi'",
+    "schema_links": {
+      "OHEM": [
+        "homeBlock",
+        "homeState",
+        "homeStreet",
+        "homeZip",
+        "lastName",
+        "martStatus"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.581430+00:00"
+    }
+  },
+  {
+    "question_id": 362,
+    "db_id": "NTSB",
+    "question": "Identify the SQL-referenced schema pieces for: What is the average time it takes for emergency services to be notified after a crash occurs? Exclude values greater than 1000",
+    "gold_sql": "SELECT AVG(NOTIFIED) AVGNOTIFICATIONTIME FROM EMSCARE WHERE NOTIFIED <= 1000",
+    "schema_links": {
+      "EMSCARE": [
+        "NOTIFIED"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.608758+00:00"
+    }
+  },
+  {
+    "question_id": 363,
+    "db_id": "SBODemoUS-Reports",
+    "question": "Provide schema links for the following user request: What are the type codes and screen fonts for documents that use the email font 'Tahoma'?",
+    "gold_sql": "select TypeCode, ScreenFont from RDOC where EmailFont = 'Tahoma'",
+    "schema_links": {
+      "RDOC": [
+        "EmailFont",
+        "ScreenFont",
+        "TypeCode"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.612053+00:00"
+    }
+  },
+  {
+    "question_id": 364,
+    "db_id": "PacificIslandLandbirds",
+    "question": "Provide schema links for the following user request: Make a list of events that are repeat samples that were verified by Lauren Smith, and that includes the event id, station id, and the start date,.",
+    "gold_sql": "select event_id, station_id, start_date  from tbl_events where repeat_sample = 1 and verified_by = 'Lauren Smith'",
+    "schema_links": {
+      "tbl_Events": [
+        "Event_ID",
+        "Repeat_Sample",
+        "Start_Date",
+        "Station_ID",
+        "Verified_by"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.624801+00:00"
+    }
+  },
+  {
+    "question_id": 365,
+    "db_id": "NTSB",
+    "question": "Identify the SQL-referenced schema pieces for: What are all the makes of vehicles in the database?",
+    "gold_sql": "SELECT DISTINCT MAKE FROM VPICDECODE",
+    "schema_links": {
+      "VPICDECODE": [
+        "Make"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.639870+00:00"
+    }
+  },
+  {
+    "question_id": 366,
+    "db_id": "KlamathInvasiveSpecies",
+    "question": "Provide schema links for the following user request: For the event at the highest elevation recorded on July 28 2009, show the light index, evergreen coverage, litter coverage, vegetation height, and elevation",
+    "gold_sql": "select top 1 LightIndex, Evergreen, Litter, VegHeight, Elevation from tbl_MicroHabitat m join tbl_Events e on m.Event_ID = e.Event_ID join tbl_Locations l on e.Location_ID = l.Location_ID where year(Start_Date) = 2009 and month(Start_Date) = 7 and day(Start_Date) = 28 order by Elevation desc",
+    "schema_links": {
+      "tbl_Events": [
+        "Event_ID",
+        "Location_ID",
+        "Start_Date"
+      ],
+      "tbl_Locations": [
+        "Elevation",
+        "Location_ID"
+      ],
+      "tbl_MicroHabitat": [
+        "Event_ID",
+        "Evergreen",
+        "LightIndex",
+        "Litter",
+        "VegHeight"
+      ]
+    },
+    "augmentation_meta": {
+      "strategy": "augC_hybrid_small",
+      "source": "local",
+      "generator_tag": "rewrite_c",
+      "vendor": null,
+      "timestamp_utc": "2026-06-02T12:15:26.651016+00:00"
+    }
+  }
+]

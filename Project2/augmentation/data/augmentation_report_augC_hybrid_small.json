@@ -1,0 +1,19 @@
+{
+  "strategy": "augC_hybrid_small",
+  "seed": 42,
+  "max_new_rows": 90,
+  "requested_api_max_rows": 25,
+  "accepted_rows": 65,
+  "accepted_local_rows": 65,
+  "accepted_vendor_api_rows": 0,
+  "skip_exact_duplicate": 0,
+  "skip_near_duplicate": 0,
+  "skip_parse_error": 0,
+  "skip_no_links": 0,
+  "aug_rows_path": "/root/CSE234-Project2-SFT/Project2/augmentation/data/aug_rows_augC_hybrid_small.json",
+  "augmented_train_path": "/root/CSE234-Project2-SFT/Project2/augmentation/data/augmented_train_augC_hybrid_small.json",
+  "strategy_provenance_path": "/root/CSE234-Project2-SFT/Project2/augmentation/data/provenance_augC_hybrid_small.jsonl",
+  "aggregate_provenance_path": "/root/CSE234-Project2-SFT/Project2/augmentation/augmentation_provenance.jsonl",
+  "external_api_boundary": "external_vendor_api_may_be_used_for_annotation_or_generation_only_never_as_final_trained_model",
+  "sql_parser_available": false
+}
