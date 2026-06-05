@@ -1,0 +1,49 @@
+[
+  {
+    "config_id": "w2_cfg07_lora_qwen35_2b_minimal_lr2e5_a100_ctrl_noaug",
+    "train_mode": "lora",
+    "model_name": "Qwen/Qwen3.5-2B",
+    "schema_mode": "minimal",
+    "output_style": "sorted_compact",
+    "target_mode": "json_only",
+    "lora": {
+      "r": 16,
+      "alpha": 32,
+      "dropout": 0.05,
+      "target_modules": [
+        "q_proj",
+        "k_proj",
+        "v_proj",
+        "o_proj"
+      ]
+    },
+    "train": {
+      "learning_rate": 2e-05,
+      "lr_scheduler_type": "linear",
+      "per_device_train_batch_size": 8,
+      "per_device_eval_batch_size": 8,
+      "gradient_accumulation_steps": 2,
+      "max_steps": 280,
+      "logging_steps": 20,
+      "eval_steps": 40,
+      "save_strategy": "chunk",
+      "bf16": true
+    },
+    "generation": {
+      "max_new_tokens": 220,
+      "temperature": 0.05,
+      "top_p": 0.9,
+      "top_k": 30,
+      "repetition_penalty": 1.02
+    },
+    "parent_config_id": "w2_cfg07_lora_qwen15b_minimal_lr2e5_a100",
+    "augmentation_strategy": "ctrl_noaug",
+    "model_kwargs": {
+      "trust_remote_code": true
+    },
+    "base_model_swap": {
+      "from": "Qwen/Qwen2.5-1.5B-Instruct",
+      "to": "Qwen/Qwen3.5-2B"
+    }
+  }
+]
